@@ -19,6 +19,8 @@ import Fetc from './src/component/Fetc';
 import Pushc from './src/component/Pushc';
 import Trying from './src/screens/Trying';
 import Resp from './src/component/Resp';
+import Login from './src/screens/Login';
+import Signup from './src/screens/Signup';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -149,6 +151,26 @@ export default function App() {
               fontSize:25,
             },
             headerTitleAlign:'center',
+          }}
+        />
+        <Stack.Screen name="Login" component={Login}
+           options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            /*headerBackVisible:false,*/
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+        <Stack.Screen name="Signup" component={Signup}
+           options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            /*headerBackVisible:false,*/
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
           }}
         />
       </Stack.Navigator>

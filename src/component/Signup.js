@@ -1,35 +1,30 @@
 import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
-import {React, useState, useCallback} from 'react'
+import React from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 
-import { firebase } from './Config';
-import { db } from "./Config";
+import { firebase } from '../component/Config';
+import { db } from "../component/Config";
 import { addDoc, collection, doc, getDoc, setDoc, getDocs, getFirestore } from 'firebase/firestore'
-import DocumentPicker from "react-native-document-picker";
-import * as ImagePicker from 'expo-image-picker';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
-    const normalize = (size) => {
-        const newSize = size * scale;
-        if (Platform.OS === 'ios') {
-            return Math.round(PixelRatio.roundToNearestPixel(newSize));
-        } 
-        else {
-            return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
-        }
-    };
+const normalize = (size) => {
+  const newSize = size * scale;
+  if (Platform.OS === 'ios') {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
+  }
+};
 
-const Pushc = () => {
+const Signup = () => {
     const navigation=useNavigation();
     const db = getFirestore();
-    const [head, onChangeHead] = useState();
-    const [desc, onChangeDesc] = useState();
-    const [imgg, onChangeImg] = useState();
-    const [respf, onChangeRespf] = useState();
-    const [image, setImage] = useState(null);
-        
+    const [head, onChangeHead] = React.useState();
+    const [desc, onChangeDesc] = React.useState();
+    const [imgg, onChangeImg] = React.useState();
+    const [respf, onChangeRespf] = React.useState();
     const Create = () => {
         if(head==null){
             onChangeRespf("post title is empty");
@@ -37,43 +32,25 @@ const Pushc = () => {
         else if(desc==null){
             onChangeRespf("post description is empty");
         }
-        else if(image==null){
+        else if(imgg==null){
             onChangeRespf("image link is empty");
         }
         else{
+
             addDoc(collection(db,"users"),{
                 username:head,
                 userdec:desc,
-                userimg:image,
+                userimg:imgg,
             }).then(()=>{
                 console.log('data submitted');
             }).catch((error) =>{
                 console.log(error);
             });
-            
+        
             navigation.navigate("Resp");
         }
     };
     
-    const selectOneFile = async () => {
-        // Pick a single file
-        console.log("yssss");
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            /*aspect: [4, 3],*/
-            quality: 1,
-        });
-      
-        console.log(result);
-        //console.log(result.uri);
-        setImage(result.uri);
-        /*if (!result.cancelled) {
-            setImage(result.assets[0].uri);
-            console.log(result.assets[0].uri);
-        }*/
-        //console.log("we are");
-    };
 
   return (
     <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
@@ -109,13 +86,8 @@ const Pushc = () => {
                                 multiline={true}
                                 textAlignVertical={'top'}
                                 placeholder="enter post image link"
+                                
                             />
-                            <TouchableOpacity
-                                onPress={selectOneFile}
-                                style={styles.uploadView}
-                            >
-                                <Text style={styles.inputButtontText}>Signup</Text>
-                            </TouchableOpacity>
                             <Button title="send" onPress={Create}></Button>
                             <Text style={styles.res}>{respf}</Text>
                         </View>
@@ -128,7 +100,7 @@ const Pushc = () => {
   )
 }
 
-export default Pushc
+export default Signup
 
 const styles = StyleSheet.create({
     backImage:{

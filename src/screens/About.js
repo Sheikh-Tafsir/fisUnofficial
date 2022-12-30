@@ -1,5 +1,6 @@
 import { Dimensions,PixelRatio, TouchableOpacity, StyleSheet, Text, View, ImageBackground, Image, Linking, Button } from 'react-native'
 import React from 'react'
+import Menu from '../component/Menu';
 import {LinearGradient} from 'expo-linear-gradient';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
@@ -67,9 +68,14 @@ const About = () => {
               />
           </TouchableOpacity>
         </View>
+
       </LinearGradient>
+      <View style={[styles.menu,{transform: [
+                            { translateY: normalize(-27)},
+                        ],  }]}>
+            <Menu ></Menu> 
+      </View>
       </ImageBackground>
-      
     </View>
   )
 }

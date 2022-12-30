@@ -1,9 +1,19 @@
-import { StyleSheet, Text, View, Image, ImageBackground, Button, SafeAreaView, ScrollView, StatusBar, FlatList, TouchableHighlight } from 'react-native'
+import { Dimensions,PixelRatio,StyleSheet, Text, View, Image, ImageBackground, Button, SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import {BoxShadow} from 'react-native-shadow'
 import React from 'react'
+import Menu from '../component/Menu';
 import Teamgal from '../component/Teamgal';
-
+const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+const scale = SCREEN_WIDTH / 320;
+const normalize = (size) => {
+    const newSize = size * scale;
+    if (Platform.OS === 'ios') {
+      return Math.round(PixelRatio.roundToNearestPixel(newSize));
+    } else {
+      return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
+    }
+  };
 const Team = () => {
     /*const teamCard = ({item}) =>{
         return(
@@ -24,6 +34,11 @@ const Team = () => {
   return (
     <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>
+            <View style={[styles.menu,{transform: [
+                                { translateY: normalize(585)},
+                            ],  }]}>
+                <Menu ></Menu> 
+            </View>
             <ScrollView style={styles.scrollView}> 
                 <Text style={styles.title}>Our Team</Text>
                 {/*<FlatList
@@ -116,6 +131,10 @@ const styles = StyleSheet.create({
         textAlign:'center',
         color:'white',
         fontSize:20,
+    },
+    menu:{
+        marginTop:normalize(-50),
+        zIndex:100,
     }
 })
 export default Team

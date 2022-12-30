@@ -21,11 +21,14 @@ const Homes = () => {
           <Text style={styles.headdesc}>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without</Text>
           <Image
                 style={styles.imgStyle}
-                source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/257159197_106607948509272_5433450592906532420_n.png?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lUIkMVAp--0AX_wJwd1&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_0IVq5ciLmP9rfl6YefkmmUop90C2241hURNE5ZQ03IQ&oe=6346C60A"}}
+                source={require("../images/1.png")}
+                //source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/257159197_106607948509272_5433450592906532420_n.png?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lUIkMVAp--0AX_wJwd1&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_0IVq5ciLmP9rfl6YefkmmUop90C2241hURNE5ZQ03IQ&oe=6346C60A"}}
           />
         </View>
         
-        <View>
+        <View style={{transform: [
+                { translateY: 25},                         
+          ] }}>
           <Menu/>
         </View>
       </ImageBackground>

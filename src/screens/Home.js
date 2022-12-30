@@ -23,13 +23,15 @@ const Home = (props) => {
                             { rotateZ: '25deg'},
                             
                         ],  }]}
+                        source={require("../images/3.jpg")}
                         //source={{uri:"https://w0.peakpx.com/wallpaper/282/480/HD-wallpaper-black-panther-avengers-black-panther-dark-dhrubo2002-hero-marvel-theme.jpg"}}  
-                        source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/271985824_131197406050326_8841516075399285771_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=z1SnARuSv68AX83N8FG&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_qlefCedWfbcjXABci-IC1ikFjLD24oA0GN-TTvQ83nA&oe=6345F8D5"}} 
+                        //source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/271985824_131197406050326_8841516075399285771_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=z1SnARuSv68AX83N8FG&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_qlefCedWfbcjXABci-IC1ikFjLD24oA0GN-TTvQ83nA&oe=6345F8D5"}} 
                     />
                     <Image
                         style={styles.headerImage}
+                        source={require("../images/2.jpg")}
                         //source={{uri:"https://i.pinimg.com/736x/ef/a9/39/efa9393c1b466b04b82a910a0a6a3b88.jpg"}}
-                        source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/257159197_106607948509272_5433450592906532420_n.png?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lUIkMVAp--0AX_wJwd1&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_0IVq5ciLmP9rfl6YefkmmUop90C2241hURNE5ZQ03IQ&oe=6346C60A"}}
+                        //source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/257159197_106607948509272_5433450592906532420_n.png?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lUIkMVAp--0AX_wJwd1&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_0IVq5ciLmP9rfl6YefkmmUop90C2241hURNE5ZQ03IQ&oe=6346C60A"}}
                     />
                     <Image
                         style={[styles.headerImage,{transform: [
@@ -39,8 +41,9 @@ const Home = (props) => {
                             { rotateZ: '-25deg'},
                             
                         ],  }]}
+                        source={require("../images/1.png")}
                         //source={{uri:"https://i.pinimg.com/originals/b7/cd/e9/b7cde96479855eea38846f6e8a7c3930.jpg"}}  
-                        source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/277772041_150419630794770_3841383816995013476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=lsID571Y4gwAX-09yBc&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_mhuYC7iUTK3ud-gfhqu8aRnUjxBpJMn7d_H73gx8oEA&oe=63462DBB"}}
+                        //source={{uri:"https://scontent.fdac140-1.fna.fbcdn.net/v/t39.30808-6/277772041_150419630794770_3841383816995013476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=lsID571Y4gwAX-09yBc&_nc_ht=scontent.fdac140-1.fna&oh=00_AT_mhuYC7iUTK3ud-gfhqu8aRnUjxBpJMn7d_H73gx8oEA&oe=63462DBB"}}
                         
                     />
                 </View>
@@ -54,6 +57,7 @@ const Home = (props) => {
                 <View>
                     <TouchableOpacity
                         style={styles.buttonStyle}
+                        /*onPress={()=>navigation.navigate("Homes")}>*/
                         onPress={()=>navigation.navigate("Homes")}>
                         <Text style={styles.startTextStyle}>Start</Text>
                     </TouchableOpacity>
