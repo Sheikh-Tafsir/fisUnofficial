@@ -14,7 +14,7 @@ const normalize = (size) => {
 const Homes = () => {
   return (
     <View>
-      <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.image}>
+      <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.image}>
         <View style={styles.menudesc}>
           <Text style={styles.header}>Explore</Text>
           <Text style={styles.header}>The greatness</Text>

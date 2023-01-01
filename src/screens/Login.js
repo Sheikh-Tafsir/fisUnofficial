@@ -1,7 +1,10 @@
 import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
-import {React,useState} from 'react'
+import {React,useState, useEffect} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
+import AnimatedLoader from "react-native-animated-loader";
+import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
+
 
 import { firebase } from '../component/Config';
 import { db } from "../component/Config";
@@ -18,6 +21,8 @@ const normalize = (size) => {
   }
 };
 
+
+
 const Login = () => {
     const navigation=useNavigation();
     const db = getFirestore();
@@ -25,12 +30,26 @@ const Login = () => {
     const [password, onChangePassword] = useState();
     const [respf, onChangeRespf] = useState();
     const [userinfo,onChangeUserinfo] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [textInputValue, settextInputValue] = useState('');
+    
+    useEffect(() => {
+        setInterval(() => {
+        setVisible(visible);
+        }, 4000);
+    }, []);
+
     const CheckLogin = () => {
-        if(username == null){
+        setVisible(!visible);
+        if(username == null || username == ''){
             onChangeRespf("username is empty");
+            navigation.navigate("Login");
+            
         }
-        else if(password == null){
+        else if(password == null || password == ''){
             onChangeRespf("password is empty");
+            navigation.navigate("Login");
+
         }
         else{
             let users = [];
@@ -43,15 +62,26 @@ const Login = () => {
                 });
                 onChangeUserinfo([...users]);
                 //console.log(users[0].password);
-                let pass = users[0].password;
                 //console.log(pass+"b");
-  
-                if(pass === password){
-                    onChangeRespf("Loggin in");
-                    navigation.navigate("Homes");
+                //alert(users.length);
+                
+                if(users.length == 0){
+                    onChangeRespf("user don't exists");
+                    navigation.navigate("Login");
                 }
                 else{
-                    onChangeRespf("username or password is wrong");
+                    let pass = users[0].password;
+                    //alert(pass);
+                    if(pass === password){
+                        onChangeRespf("Loggin in");
+                        AsyncStorage.setItem('any_key_here',username);
+                        navigation.navigate("Homes");
+                    }
+                    else{
+                        onChangeRespf("username or password is wrong");
+                        navigation.navigate("Login");
+
+                    }
                 }
             });
 
@@ -62,7 +92,15 @@ const Login = () => {
 
   return (
     <KeyboardAvoidingView behaviour={Platform.OS === 'ios' ? 'padding' : null}>
-        <ImageBackground source={{uri: "https://mcdonaldobservatory.org/sites/default/files/styles/7col/public/images/news/gallery/McDonald_Observatory-243_0.jpg?itok=mQSfLJxq" }} resizeMode="cover" style={styles.backImage}>
+        <ImageBackground source={require("../images/logsignback.jpg")} resizeMode="cover" style={styles.backImage}>
+            <AnimatedLoader
+                visible={visible}
+                overlayColor="rgba(255,255,255,0.75)"
+                animationStyle={styles.lottie}
+                style={styles.lottieStyle}
+                speed={1}>
+                <Text>Matching Credentials...</Text>
+            </AnimatedLoader>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
                     <View style={styles.form}>
@@ -78,6 +116,7 @@ const Login = () => {
                             textAlignVertical={'top'}
                             placeholder="Username"
                             placeholderTextColor="rgb(30,30,30)" 
+                            /*ref={this.nameTextInput}*/
                         />
                         <TextInput
                             style={styles.input}
@@ -87,11 +126,12 @@ const Login = () => {
                             textAlignVertical={'top'}
                             placeholder="Password"
                             placeholderTextColor="rgb(30,30,30)" 
+                            /*ref={this.passTextInput}*/
                         />
                         
                         <TouchableOpacity
                             style={styles.inputButton}
-                            onPress={CheckLogin}>
+                            onPress={()=>CheckLogin()}>
                             <Text style={styles.inputButtontText}>Login</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -192,6 +232,14 @@ const styles = StyleSheet.create({
         fontSize:15,
         textAlign:'center',
         fontWeight:'bold',
-    }
+    },
+    lottie: {
+        width: 100,
+        height: 100,
+        
+    },
+    lottieStyle:{
+        
+    },
 
 })

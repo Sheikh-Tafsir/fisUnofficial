@@ -2,6 +2,8 @@ import { Dimensions,PixelRatio, TouchableOpacity, StyleSheet, Text, View, ImageB
 import React from 'react'
 import Menu from '../component/Menu';
 import {LinearGradient} from 'expo-linear-gradient';
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -15,10 +17,15 @@ const normalize = (size) => {
 };
 
 const About = () => {
+  const navigation=useNavigation();
+  const LogoutFunc = ()=>{
+    AsyncStorage.setItem('any_key_here','');
+    navigation.navigate("Home");
+  }
   
   return (
     <View>
-      <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
+      <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
       <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
         <View style={styles.descPart}>
           <Text style={styles.title}>Get in touch</Text>
@@ -41,7 +48,11 @@ const About = () => {
             <Text  style={styles.pointMain} onPress={() => Linking.openURL('https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvqKMHmvPNNtQzcFXVtrtJBDzscxhJhXMxJMgzLSslBDFmPkXrPNhHXGvRSjgvgXlbLTsB')}>iutfis2061@gmail.com</Text>
           </View>
         </View>
-        
+        <View>
+          <TouchableOpacity onPress={() =>LogoutFunc()} style={styles.logoutBut}>
+              <Text style={styles.logoutButText}>Log out</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.footerLogo}>
           <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/IUTFIS')}>
           <Image
@@ -147,6 +158,20 @@ const styles = StyleSheet.create({
     resizeMode : 'stretch',
     borderRadius:50,
     marginRight:15,
+  },
+  logoutBut:{
+    backgroundColor:'white',
+    width:'70%',
+    height:'22%',
+    
+    marginHorizontal:'15%',
+  },
+  logoutButText:{
+    textAlign:'center',
+    color:'#023050',
+    fontSize:20,
+    fontWeight:'bold',
+    lineHeight:30,
   },
 
 

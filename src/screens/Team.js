@@ -32,7 +32,7 @@ const Team = () => {
         );
     };*/
   return (
-    <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
+    <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>
             <View style={[styles.menu,{transform: [
                                 { translateY: normalize(585)},

@@ -146,11 +146,13 @@ export default function App() {
           }}
         />
         <Stack.Screen name="Contacts" component={Contacts}
-          options={{
-            headerTitleStyle:{
-              fontSize:25,
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            /*headerBackVisible:false,*/
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
             },
-            headerTitleAlign:'center',
           }}
         />
         <Stack.Screen name="Login" component={Login}

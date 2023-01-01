@@ -1,17 +1,36 @@
 import {  TouchableOpacity, StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
-import React, { Children } from 'react';
+import {React, Children, useState } from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
 import Menu from '../component/Menu';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
 import {BlurView} from '@react-native-community/blur';
+import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
 
 const Home = (props) => {
     const description="In publishing and graphic design, Lore ipsum is a placeholder text commonly used to demonstrate ";
     const navigation=useNavigation();
+    const [asyncVal,setAsyncVal]=useState('');
+    const checkNav = ()=>{
+        AsyncStorage.getItem('any_key_here')
+        .then((value)=>{
+            setAsyncVal(value);
+            //alert(value);
+            if(value === null){
+                navigation.navigate("Login")
+            }
+            else if(value === ''){
+                navigation.navigate("Login")
+            }
+            else{
+                navigation.navigate("Homes")
+            }
+        })
+    };
+
     return (
     <View style={styles.mainContainer}>
-        <ImageBackground source={{uri: "https://w0.peakpx.com/wallpaper/173/791/HD-wallpaper-galaxy-stars-space-dark-thumbnail.jpg" }} resizeMode="cover" style={styles.image}>
+        <ImageBackground source={require("../images/homeback.jpg")} resizeMode="cover" style={styles.image}>
         {/*<LinearGradient colors={['rgb(27,26,31)', 'rgb(36,55,35)','rgb(27,26,31)' ]} style={styles.linearGradient}>*/}
             <View style={styles.homeTop}>
                 <View style={styles.headerImageVw}>
@@ -58,7 +77,7 @@ const Home = (props) => {
                     <TouchableOpacity
                         style={styles.buttonStyle}
                         /*onPress={()=>navigation.navigate("Homes")}>*/
-                        onPress={()=>navigation.navigate("Homes")}>
+                        onPress={()=>checkNav()}>
                         <Text style={styles.startTextStyle}>Start</Text>
                     </TouchableOpacity>
                 </View>

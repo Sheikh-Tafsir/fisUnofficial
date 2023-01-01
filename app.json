@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "native_proj",
-    "slug": "native_proj",
+    "name": "fisunofficial",
+    "slug": "fisunofficial",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/images/1.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.sheikh_tafsir_rahman.native_proj"

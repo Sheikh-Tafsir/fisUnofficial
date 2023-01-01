@@ -1,7 +1,9 @@
 import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
-import {React,useState} from 'react'
+import {React,useState, useEffect} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
+import AnimatedLoader from "react-native-animated-loader";
+import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
 
 import { firebase } from '../component/Config';
 import { db } from "../component/Config";
@@ -25,36 +27,76 @@ const Signup = () => {
     const [password, onChangePassword] = useState();
     const [email, onChangeEmail] = useState();
     const [respf, onChangeRespf] = useState();
+    const [userinfo,onChangeUserinfo] = useState([]);
+    const [visible, setVisible] = useState(false);
+    
+    useEffect(() => {
+        setInterval(() => {
+        setVisible(visible);
+        }, 4000);
+    }, []);
+    
     const CheckSignup = () => {
-        if(username==null){
+        setVisible(!visible);
+        if(username==null || username == ''){
             onChangeRespf("username is empty");
+            navigation.navigate("Signup");
         }
-        else if(password==null){
+        else if(password==null || password == ''){
             onChangeRespf("password is empty");
+            navigation.navigate("Signup");
         }
-        else if(email==null){
+        else if(email==null || email == ''){
             onChangeRespf("email is empty");
+            navigation.navigate("Signup");
         }
         else{
-
-            setDoc(doc(db,"login",username),{
-                username:username,
-                password:password,
-                email:email,
-            }).then(()=>{
-                console.log('data submitted');
-            }).catch((error) =>{
-                console.log(error);
+            let users = [];
+            getDocs(collection(db,"login")).then(docSnap=>{
+                
+                docSnap.forEach((doc)=>{
+                    if(doc.id == username){
+                        users.push({ ...doc.data(),id:doc.id}); 
+                    }
+                });
+                onChangeUserinfo([...users]);
+                //console.log(users[0].password);
+                //console.log(pass+"b");
+                //alert(users.length);
+                
+                if(users.length >= 1){
+                    onChangeRespf("username already taken");
+                    navigation.navigate("Signup");
+                }
+                else{
+                    setDoc(doc(db,"login",username),{
+                        username:username,
+                        password:password,
+                        email:email,
+                    }).then(()=>{
+                        console.log('data submitted');
+                    }).catch((error) =>{
+                        console.log(error);
+                    });
+                    onChangeRespf("Signing up");
+                    navigation.navigate("Homes");
+                }
             });
-            onChangeRespf("Signing up");
-            navigation.navigate("Homes");
         }
     };
     
 
   return (
     <KeyboardAvoidingView behaviour={Platform.OS === 'ios' ? 'padding' : null}>
-        <ImageBackground source={{uri: "https://mcdonaldobservatory.org/sites/default/files/styles/7col/public/images/news/gallery/McDonald_Observatory-243_0.jpg?itok=mQSfLJxq" }} resizeMode="cover" style={styles.backImage}>
+        <ImageBackground source={require("../images/logsignback.jpg")} resizeMode="cover" style={styles.backImage}>
+            <AnimatedLoader
+                visible={visible}
+                overlayColor="rgba(255,255,255,0.75)"
+                animationStyle={styles.lottie}
+                style={styles.lottieStyle}
+                speed={1}>
+                <Text>Matching Credentials...</Text>
+            </AnimatedLoader>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
                     <View style={styles.form}>

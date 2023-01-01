@@ -10,7 +10,7 @@ const Menu = () => {
         <View style={styles.menuContainer}>
                 <TouchableOpacity
                     style={styles.buttonStyle}
-                    onPress={()=>navigation.navigate("Home")}>
+                    onPress={()=>navigation.navigate("Homes")}>
                     <Image
                         style={styles.iconStyle}
                         source={{uri:"https://img.icons8.com/metro/344/home.png"}}
