@@ -15,22 +15,6 @@ const normalize = (size) => {
     }
   };
 const Team = () => {
-    /*const teamCard = ({item}) =>{
-        return(
-            <View style={styles.mainContainer}>
-                <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
-                    <Image style={styles.imgStyle}
-                            source={item.image}
-                            resizeMode="contain"
-                        />
-                    <View style={styles.cardDesc}>
-                        <Text style={styles.cardName}>{item.name}</Text>
-                        <Text style={styles.cardPos}>{item.pos}</Text>
-                    </View>
-                </LinearGradient>
-            </View>
-        );
-    };*/
   return (
     <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>
@@ -80,60 +64,59 @@ const styles = StyleSheet.create({
     },
     title:{
         color:'white',
-        fontSize:30,
+        fontSize:normalize(27),
         fontWeight:'bold',
         textAlign:'center',
-        marginBottom:5,
-        marginTop:10,
+        marginBottom:normalize(0),
+        marginTop:normalize(25),
     },
     container:{
-
+        height:'95%',
     },
     scrollView:{
-        
-    
+        height:'100%',
     },
     mainContainer:{
         width:'70%',
-        marginHorizontal:60,
-        marginVertical:15,
+        marginHorizontal:'15%',
+        marginVertical:normalize(13),
         
     },
     backLinearGradient:{
         borderColor:'white',
-        borderWidth:0.7,
+        borderWidth:normalize(0.7),
         borderRadius:15,
     },
     imgStyle:{
         height:undefined,
-        width:'85%',
+        width:'86%',
         aspectRatio:1,
-        marginHorizontal: 20,
-        marginTop:30,
-        marginBottom:10,
+        marginHorizontal: '7%',
+        marginTop:normalize(27),
+        marginBottom:normalize(9),
         borderRadius:10,
         shadowColor: 'black',
     },
     cardDesc:{
-        width:'83%',
-        marginHorizontal: 20,
-        marginBottom:20,
+        width:'84%',
+        marginHorizontal: '8%',
+        marginBottom:normalize(18),
         
 
     },
     cardName:{
         textAlign:'center',
         color:'white',
-        fontSize:20,
+        fontSize:normalize(17),
         fontWeight:'bold',
     },
     cardPos:{
         textAlign:'center',
         color:'white',
-        fontSize:20,
+        fontSize:normalize(17),
     },
     menu:{
-        marginTop:normalize(-50),
+        marginTop:normalize(-70),
         zIndex:100,
     }
 })

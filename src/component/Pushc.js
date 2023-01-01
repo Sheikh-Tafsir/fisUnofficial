@@ -2,7 +2,7 @@ import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, T
 import {React, useState, useCallback} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
-
+import Menu from '../component/Menuadm';
 import { firebase } from './Config';
 import { db } from "./Config";
 import { addDoc, collection, doc, getDoc, setDoc, getDocs, getFirestore } from 'firebase/firestore'
@@ -31,13 +31,13 @@ const Pushc = () => {
     const [image, setImage] = useState(null);
         
     const Create = () => {
-        if(head==null){
+        if(head==null || head==''){
             onChangeRespf("post title is empty");
         }
-        else if(desc==null){
+        else if(desc==null || desc==''){
             onChangeRespf("post description is empty");
         }
-        else if(image==null){
+        else if((image==null || image=='') && (imgg==null || imgg=='')){
             onChangeRespf("image link is empty");
         }
         else{
@@ -78,6 +78,9 @@ const Pushc = () => {
   return (
     <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>
+            <View style={[styles.menu,{transform: [{ translateY: normalize(585)},],  }]}>
+                <Menu></Menu> 
+            </View>
             <ScrollView style={styles.scrollView}> 
                 <Text style={styles.title}>Create post</Text>
                 <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
@@ -114,7 +117,7 @@ const Pushc = () => {
                                 onPress={selectOneFile}
                                 style={styles.uploadView}
                             >
-                                <Text style={styles.inputButtontText}>Signup</Text>
+                                <Text style={styles.inputButtontText}>Upload Image</Text>
                             </TouchableOpacity>
                             <Button title="send" onPress={Create}></Button>
                             <Text style={styles.res}>{respf}</Text>
@@ -142,39 +145,57 @@ const styles = StyleSheet.create({
     },
     title:{
         color:'white',
-        fontSize:30,
+        fontSize:normalize(26),
         fontWeight:'bold',
         textAlign:'center',
-        marginBottom:7,
-        marginTop:10,
+        marginBottom:normalize(7),
+        marginTop:normalize(30),
     },
     backLinearGradient:{
         borderColor:'white',
-        borderWidth:0.7,
+        borderWidth:normalize(1),
         borderRadius:15,
-        height:'87%',
+        height:normalize(500),
         marginHorizontal:'5%',
-        marginTop:'5%',
+        marginTop:normalize(5),
     },
     form:{
         width:'80%',
         marginHorizontal:'10%',
-        marginVertical:'10%',
-
+        marginTop:normalize(30),
 
     },
     input:{
         backgroundColor:'rgba(255,255,255,0.1)',
         borderColor:'white',
-        borderBottomWidth:2,
+        borderBottomWidth:normalize(2),
         color:'black',
-        marginBottom:'10%',
+        marginBottom:normalize(20),
         height:normalize(45),
+        borderRadius:5,
+        paddingLeft:normalize(10),
+        paddingTop:normalize(5),
         
     },
     res:{
         textAlign:'center',
         color:'white',
     },
+    inputButtontText:{
+        backgroundColor:'rgba(255,255,255,0.1)',
+        color:'rgba(0,0,0,0.5)',
+        borderRadius:5,
+        height:normalize(30),
+        borderColor:'white',
+        borderBottomWidth:normalize(2),
+        marginBottom:normalize(20),
+        paddingLeft:normalize(10),
+        paddingTop:normalize(5),
+    },
+    menu:{
+        marginTop:normalize(-70),
+        zIndex:100,
+
+    }
 
 })

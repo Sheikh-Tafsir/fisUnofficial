@@ -21,9 +21,7 @@ const normalize = (size) => {
   }
 };
 
-
-
-const Login = () => {
+const Loginadm = () => {
     const navigation=useNavigation();
     const db = getFirestore();
     const [username, onChangeUsername] = useState();
@@ -43,49 +41,24 @@ const Login = () => {
         setVisible(!visible);
         if(username == null || username == ''){
             onChangeRespf("username is empty");
-            navigation.navigate("Login");
+            navigation.navigate("Loginadm");
             
         }
         else if(password == null || password == ''){
             onChangeRespf("password is empty");
-            navigation.navigate("Login");
+            navigation.navigate("Loginadm");
 
         }
         else{
-            let users = [];
-            getDocs(collection(db,"login")).then(docSnap=>{
-                
-                docSnap.forEach((doc)=>{
-                    if(doc.id == username){
-                        users.push({ ...doc.data(),id:doc.id}); 
-                    }
-                });
-                onChangeUserinfo([...users]);
-                //console.log(users[0].password);
-                //console.log(pass+"b");
-                //alert(users.length);
-                
-                if(users.length == 0){
-                    onChangeRespf("user don't exists");
-                    navigation.navigate("Login");
-                }
-                else{
-                    let pass = users[0].password;
-                    //alert(pass);
-                    if(pass === password){
-                        onChangeRespf("Loggin in");
-                        AsyncStorage.setItem('any_key_here',username);
-                        navigation.navigate("Homes");
-                    }
-                    else{
-                        onChangeRespf("username or password is wrong");
-                        navigation.navigate("Login");
-
-                    }
-                }
-            });
-
-            
+            if(username === "tafsir" && password === "tafsir12"){
+                onChangeRespf("Loggin in");
+                AsyncStorage.setItem('any_key_here',username);
+                navigation.navigate("Homesadm");
+            }
+            else{
+                onChangeRespf("username or password is wrong");
+                navigation.navigate("Loginadm");
+            }
         }
     };
     
@@ -105,16 +78,16 @@ const Login = () => {
                 <ScrollView style={styles.scrollView}> 
                     <View style={styles.form}>
                         <Text style={styles.headTitle}>Welcome</Text>
-                        <Text style={styles.headTitle}>Back!</Text>
-                        <Text style={styles.subTitle}>Hey! good to see you again</Text>
-                        <Text style={styles.title}>Login Here</Text>
+                        <Text style={styles.headTitle}>Admin!</Text>
+                        <Text style={styles.subTitle}>How have you been</Text>
+                        <Text style={styles.title}>Admin Login</Text>
                         <Text style={styles.submitresp}>{respf}</Text>
                         <TextInput
                             style={styles.input}
                             onChangeText={onChangeUsername}
                             value={username}
                             textAlignVertical={'top'}
-                            placeholder="Username"
+                            placeholder="Admin name"
                             placeholderTextColor="rgb(30,30,30)" 
                             /*ref={this.nameTextInput}*/
                         />
@@ -135,12 +108,8 @@ const Login = () => {
                             <Text style={styles.inputButtontText}>Login</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={()=>navigation.navigate("Signup")}>
-                            <Text style={styles.gotoSignButton}>Don't have an ccount? Signup</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={()=>navigation.navigate("Loginadm")}>
-                            <Text style={styles.gotoAdmButton}>Login as admin</Text>
+                            onPress={()=>navigation.navigate("Login")}>
+                            <Text style={styles.gotoSignButton}>Login as user?</Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -150,7 +119,7 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Loginadm
 
 const styles = StyleSheet.create({
     backImage:{
@@ -175,7 +144,7 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize:40,
         fontWeight:'bold',
-        marginBottom:normalize(7),
+        marginBottom:7,
         marginBottom:normalize(-5),
     },
     subTitle:{
@@ -191,7 +160,7 @@ const styles = StyleSheet.create({
         fontSize:30,
         textAlign:'center',
         fontWeight:'bold',
-        marginBottom:normalize(7),
+        marginBottom:7,
         marginTop:normalize(12),
         marginBottom:normalize(10),
         
@@ -207,7 +176,7 @@ const styles = StyleSheet.create({
         /*borderColor:'white',
         borderBottomWidth:2,*/
         color:'black',
-        marginBottom:normalize(20),
+        marginBottom:'10%',
         height:normalize(45),
         borderRadius:50,
         fontSize:17,
@@ -236,20 +205,6 @@ const styles = StyleSheet.create({
         fontSize:15,
         textAlign:'center',
         fontWeight:'bold',
-    },
-    gotoAdmButton:{
-        color:'white',
-        borderWidth:normalize(2),
-        borderColor:'white',
-        borderRadius:50,
-        width:'50%',
-        height:normalize(22),
-        lineHeight:normalize(19),
-        fontSize:15,
-        textAlign:'center',
-        fontWeight:'bold',
-        marginTop:normalize(70),
-        marginLeft:'25%',
     },
     lottie: {
         width: 100,

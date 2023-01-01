@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { Dimensions,PixelRatio,StyleSheet, Text, View, Image, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -21,9 +21,25 @@ import Trying from './src/screens/Trying';
 import Resp from './src/component/Resp';
 import Login from './src/screens/Login';
 import Signup from './src/screens/Signup';
+import Loginadm from './src/screens/Loginadm';
+import Homesadm from './src/screens/Homesadm';
+
+
+
+const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+const scale = SCREEN_WIDTH / 320;
+const normalize = (size) => {
+  const newSize = size * scale;
+  if (Platform.OS === 'ios') {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
+  }
+};
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" /*screenOptions={{headerShown: false}}*/>
@@ -31,6 +47,7 @@ export default function App() {
           {(props)=> <Home {...props} channelName=
           {"wonder Intersteller"}/>}
         </Stack.Screen>
+
         <Stack.Screen name="Homes" component={Homes}
           /*options={{
             headerTitleStyle:{
@@ -46,17 +63,8 @@ export default function App() {
               backgroundColor: '#0b0f1e',
             },
           }}
-
-        >
-        </Stack.Screen>
-        <Stack.Screen name="Course" component={Course}
-          options={{
-            headerTitleStyle:{
-              fontSize:25,
-            },
-            headerTitleAlign:'center',
-          }}
         />
+        
         <Stack.Screen name="UserData" component={UserData}
           options={{
             headerTitleStyle:{
@@ -65,6 +73,7 @@ export default function App() {
             headerTitleAlign:'center',
           }}
         />
+     
         <Stack.Screen name="About" component={About}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -75,6 +84,7 @@ export default function App() {
             },
           }}
         />
+        
         <Stack.Screen name="Progrm" component={Progrm}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -85,6 +95,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen name="Team" component={Team}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -95,6 +106,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen name="Gallery" component={Gallery}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -105,6 +117,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen name="Fetc" component={Fetc}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -115,6 +128,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen name="Pushc" component={Pushc}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -125,26 +139,7 @@ export default function App() {
             },
           }}
         />
-        <Stack.Screen name="Resp" component={Resp}
-           options={{ 
-            headerTitle: (props) => <Logo {...props} />,
-            /*headerBackVisible:false,*/
-            headerTintColor: 'white',
-            headerStyle: {
-              backgroundColor: '#0b0f1e',
-            },
-          }}
-        />
-        <Stack.Screen name="Trying" component={Trying}
-           options={{ 
-            headerTitle: (props) => <Logo {...props} />,
-            /*headerBackVisible:false,*/
-            headerTintColor: 'white',
-            headerStyle: {
-              backgroundColor: '#0b0f1e',
-            },
-          }}
-        />
+
         <Stack.Screen name="Contacts" component={Contacts}
           options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -155,6 +150,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen name="Login" component={Login}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -165,6 +161,7 @@ export default function App() {
             },
           }}
         />
+
         <Stack.Screen name="Signup" component={Signup}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
@@ -175,7 +172,50 @@ export default function App() {
             },
           }}
         />
-      </Stack.Navigator>
+
+        <Stack.Screen name="Loginadm" component={Loginadm}
+           options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            /*headerBackVisible:false,*/
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Resp" component={Resp}
+           options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            /*headerBackVisible:false,*/
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Trying" component={Trying}
+           options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            /*headerBackVisible:false,*/
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Homesadm" component={Homesadm}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }

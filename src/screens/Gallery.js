@@ -2,6 +2,7 @@ import { Dimensions,PixelRatio,StyleSheet, Text, View, Image, ImageBackground, B
 import {LinearGradient} from 'expo-linear-gradient';
 import React from 'react'
 import Menu from '../component/Menu';
+
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
 const normalize = (size) => {
@@ -94,17 +95,20 @@ const styles = StyleSheet.create({
     backImage:{
         height:"100%",
     },
+    container:{
+        height:"95%",
+    },
     scrollView: {
         width:'92%',
         marginHorizontal: '4%',    
     },
     title:{
         color:'white',
-        fontSize:30,
+        fontSize:normalize(27),
         fontWeight:'bold',
         textAlign:'center',
-        marginBottom:5,
-        marginTop:10,
+        marginBottom:normalize(5),
+        marginTop:normalize(30),
     },
     galBox:{
         flex:3,
@@ -123,7 +127,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
     },
     menu:{
-        marginTop:normalize(-50),
+        marginTop:normalize(-70),
         zIndex:100,
 
     }

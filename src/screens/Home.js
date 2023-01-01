@@ -17,13 +17,13 @@ const Home = (props) => {
             setAsyncVal(value);
             //alert(value);
             if(value === null){
-                navigation.navigate("Login")
+                navigation.navigate("Login");
             }
             else if(value === ''){
-                navigation.navigate("Login")
+                navigation.navigate("Login");
             }
             else{
-                navigation.navigate("Homes")
+                navigation.navigate("Homes");
             }
         })
     };

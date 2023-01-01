@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
 import {React,useState, useEffect} from 'react'
+import {LinearGradient} from 'expo-linear-gradient';
 import { withSafeAreaInsets } from "react-native-safe-area-context";
-
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -15,13 +15,13 @@ const normalize = (size) => {
   }
 };
 
-const Menu = () => {
+const Menuadm = () => {
     const navigation=useNavigation();
     return(
         <View style={styles.menuContainer}>
                 <TouchableOpacity
                     style={styles.buttonStyle}
-                    onPress={()=>navigation.navigate("Homes")}>
+                    onPress={()=>navigation.navigate("Homesadm")}>
                     <Image
                         style={styles.iconStyle}
                         source={{uri:"https://img.icons8.com/metro/344/home.png"}}
@@ -30,7 +30,7 @@ const Menu = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonStyle}
-                    onPress={()=>navigation.navigate("Fetc")}>
+                    onPress={()=>navigation.navigate("Pushc")}>
                     <Image
                         style={styles.iconStyle}
                         source={{uri:"https://img.icons8.com/ios-filled/344/trophy.png"}}
@@ -91,5 +91,6 @@ const styles = StyleSheet.create({
         height:undefined,
         aspectRatio:1,
     },
+
 });
-export default Menu;
+export default Menuadm;
