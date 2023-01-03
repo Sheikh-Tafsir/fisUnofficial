@@ -26,7 +26,9 @@ import Loginadm from './src/screens/Loginadm';
 import Homesadm from './src/screens/Homesadm';
 import Tub from './src/component/Tub';
 import Tubadm from './src/component/Tubadm';
-
+import Eventadm from './src/screens/Eventadm';
+import Viewevents from './src/screens/Viewevents';
+import Vieweventpartadm from './src/screens/Vieweventpartadm'
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -222,6 +224,7 @@ export default function App() {
 
         <Stack.Screen name="Tub" component={Tub}
           options={{ 
+            headerShown:true,
             headerTitle: (props) => <Logo {...props} />,
             headerTintColor: 'white',
             headerStyle: {
@@ -240,6 +243,35 @@ export default function App() {
           }}
         />
 
+        <Stack.Screen name="Eventadm" component={Eventadm}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Viewevents" component={Viewevents}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Vieweventpartadm" component={Vieweventpartadm}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>

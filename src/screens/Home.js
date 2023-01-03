@@ -23,7 +23,8 @@ const Home = (props) => {
                 navigation.navigate("Login");
             }
             else{
-                navigation.navigate("Tub");
+                if(value === 'tafsir') navigation.navigate("Tubadm");
+                else navigation.navigate("Tub");
             }
         })
     };

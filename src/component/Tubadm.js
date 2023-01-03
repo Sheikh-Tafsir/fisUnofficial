@@ -11,6 +11,8 @@ import Team from '../screens/Team';
 import Home from "../screens/Home";
 import Homesadm from "../screens/Homesadm";
 import Pushc from "./Pushc";
+import Eventadm from "../screens/Eventadm";
+import Vieweventpartadm from "../screens/Vieweventpartadm"
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -26,7 +28,7 @@ const normalize = (size) => {
 const Tubadm = () => {
     const Tab = createBottomTabNavigator();
   return (
-      <Tab.Navigator>
+      <Tab.Navigator initialRouteName="Homesadm">
         <Tab.Screen name="Homesadm" component={Homesadm} 
           options={{ 
             headerShown:false,
@@ -50,8 +52,8 @@ const Tubadm = () => {
             
           }}
         />
-
-        <Tab.Screen name="About" component={About} 
+        
+        <Tab.Screen name="Pushc" component={Pushc} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -60,10 +62,11 @@ const Tubadm = () => {
             },
             tabBarActiveBackgroundColor:'white',
             tabBarInactiveBackgroundColor:'#0b0f1e',
+            tabBarHideOnKeyboard: true,
             tabBarIcon:({focused, tintColor}) =>(
               <Image
                 focused={focused}
-                source={{uri:"https://img.icons8.com/pastel-glyph/344/person-male--v3.png"}}
+                source={{uri:"https://img.icons8.com/ios-filled/344/trophy.png"}}
                 style={styles.iconStyle}
               />
             ),
@@ -73,7 +76,8 @@ const Tubadm = () => {
             }
           }}
         />
-        <Tab.Screen name="Gallery" component={Gallery} 
+
+        <Tab.Screen name="Vieweventpartadm" component={Vieweventpartadm} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -95,7 +99,8 @@ const Tubadm = () => {
             }
           }}
         />
-        <Tab.Screen name="Team" component={Team} 
+
+<Tab.Screen name="Eventadm" component={Eventadm} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -104,6 +109,7 @@ const Tubadm = () => {
             },
             tabBarActiveBackgroundColor:'white',
             tabBarInactiveBackgroundColor:'#0b0f1e',
+            tabBarHideOnKeyboard: true,
             tabBarIcon:({focused, tintColor}) =>(
               <Image
                 focused={focused}
@@ -117,7 +123,8 @@ const Tubadm = () => {
             }
           }}
         />
-        <Tab.Screen name="Pushc" component={Pushc} 
+
+        <Tab.Screen name="About" component={About} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -126,11 +133,10 @@ const Tubadm = () => {
             },
             tabBarActiveBackgroundColor:'white',
             tabBarInactiveBackgroundColor:'#0b0f1e',
-            tabBarHideOnKeyboard: true,
             tabBarIcon:({focused, tintColor}) =>(
               <Image
                 focused={focused}
-                source={{uri:"https://img.icons8.com/ios-filled/344/trophy.png"}}
+                source={{uri:"https://img.icons8.com/pastel-glyph/344/person-male--v3.png"}}
                 style={styles.iconStyle}
               />
             ),

@@ -9,6 +9,7 @@ import Logo from './Logo';
 import Fetc from './Fetc';
 import Team from '../screens/Team';
 import Home from "../screens/Home";
+import Viewevents from "../screens/Viewevents";
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -49,7 +50,7 @@ const Tub = () => {
           }}
         />
 
-        <Tab.Screen name="Team" component={Team} 
+        <Tab.Screen name="Fetc" component={Fetc} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -61,7 +62,7 @@ const Tub = () => {
             tabBarIcon:({focused, tintColor}) =>(
               <Image
                 focused={focused}
-                source={{uri:"https://img.icons8.com/external-glyph-geotatah/344/external-company-conflict-resolution-glyph-glyph-geotatah.png"}}
+                source={{uri:"https://img.icons8.com/ios-filled/344/trophy.png"}}
                 style={styles.iconStyle}
               />
             ),
@@ -72,7 +73,7 @@ const Tub = () => {
           }}
         />
 
-<Tab.Screen name="Gallery" component={Gallery} 
+        <Tab.Screen name="Gallery" component={Gallery} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -95,7 +96,7 @@ const Tub = () => {
           }}
         />
         
-        <Tab.Screen name="Fetc" component={Fetc} 
+        <Tab.Screen name="Viewevents" component={Viewevents} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -107,7 +108,7 @@ const Tub = () => {
             tabBarIcon:({focused, tintColor}) =>(
               <Image
                 focused={focused}
-                source={{uri:"https://img.icons8.com/ios-filled/344/trophy.png"}}
+                source={{uri:"https://img.icons8.com/external-glyph-geotatah/344/external-company-conflict-resolution-glyph-glyph-geotatah.png"}}
                 style={styles.iconStyle}
               />
             ),
