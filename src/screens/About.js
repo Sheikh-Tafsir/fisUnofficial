@@ -26,11 +26,7 @@ const About = () => {
   return (
     <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
       <SafeAreaView style={styles.container}>
-        <View style={[styles.menu,{transform: [
-                                { translateY: normalize(585)},
-                            ],  }]}>
-                <Menu ></Menu> 
-        </View>
+
         <ScrollView style={styles.scrollView}> 
           <View style={styles.mainContainer}>
             <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
@@ -113,14 +109,14 @@ const styles = StyleSheet.create({
     height:normalize(480),
     width:'90%',
     marginHorizontal:'5%',
-    marginTop:normalize(60),
+    marginTop:normalize(23),
     borderColor:'white',
     borderWidth:normalize(0.7),
     borderRadius:15,
-    marginBottom:'20%',
+    marginBottom:normalize(20),
   },
   descPart:{
-    height:'80%',
+    height:normalize(390),
     marginTop:normalize(17),
     marginBottom:normalize(15),
   },

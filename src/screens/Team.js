@@ -18,11 +18,6 @@ const Team = () => {
   return (
     <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>
-            <View style={[styles.menu,{transform: [
-                                { translateY: normalize(585)},
-                            ],  }]}>
-                <Menu ></Menu> 
-            </View>
             <ScrollView style={styles.scrollView}> 
                 <Text style={styles.title}>Our Team</Text>
                 {/*<FlatList
@@ -68,10 +63,10 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign:'center',
         marginBottom:normalize(0),
-        marginTop:normalize(25),
+        marginTop:normalize(10),
     },
     container:{
-        height:'95%',
+        height:'100%',
     },
     scrollView:{
         height:'100%',

@@ -44,7 +44,7 @@ const Pushc = () => {
             addDoc(collection(db,"users"),{
                 username:head,
                 userdec:desc,
-                userimg:image,
+                userimg:imgg,
             }).then(()=>{
                 console.log('data submitted');
             }).catch((error) =>{
@@ -76,58 +76,53 @@ const Pushc = () => {
     };
 
   return (
-    <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
-        <SafeAreaView style={styles.container}>
-            <View style={[styles.menu,{transform: [{ translateY: normalize(585)},],  }]}>
-                <Menu></Menu> 
-            </View>
-            <ScrollView style={styles.scrollView}> 
-                <Text style={styles.title}>Create post</Text>
-                <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
-                    <KeyboardAvoidingView 
-                        behaviour={Platform.OS === 'ios' ? 'padding' : null}
-                    >
-                        <View style={styles.form}>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={onChangeHead}
-                                value={head}
-                                textAlignVertical={'top'}
-                                placeholder="enter post title"
-                                
-                            />
-                            <TextInput
-                                style={[styles.input,{height:normalize(180)}]}
-                                onChangeText={onChangeDesc}
-                                value={desc}
-                                multiline={true}
-                                textAlignVertical={'top'}
-                                placeholder="enter post description"
-                                
-                            />
-                            <TextInput
-                                style={[styles.input,{height:normalize(75)}]}
-                                onChangeText={onChangeImg}
-                                value={imgg}
-                                multiline={true}
-                                textAlignVertical={'top'}
-                                placeholder="enter post image link"
-                            />
-                            <TouchableOpacity
-                                onPress={selectOneFile}
-                                style={styles.uploadView}
-                            >
-                                <Text style={styles.inputButtontText}>Upload Image</Text>
-                            </TouchableOpacity>
-                            <Button title="send" onPress={Create}></Button>
-                            <Text style={styles.res}>{respf}</Text>
-                        </View>
-                    </KeyboardAvoidingView>
-                </LinearGradient>
-            
-            </ScrollView>
-        </SafeAreaView>
-    </ImageBackground>
+    <KeyboardAvoidingView behaviour={Platform.OS === 'ios' ? 'padding' : null}>
+        <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
+            <SafeAreaView style={styles.container}>
+                <ScrollView style={styles.scrollView}> 
+                    <Text style={styles.title}>Create post</Text>
+                    <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
+                            <View style={styles.form}>
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={onChangeHead}
+                                    value={head}
+                                    textAlignVertical={'top'}
+                                    placeholder="enter post title"
+                                    
+                                />
+                                <TextInput
+                                    style={[styles.input,{height:normalize(180)}]}
+                                    onChangeText={onChangeDesc}
+                                    value={desc}
+                                    multiline={true}
+                                    textAlignVertical={'top'}
+                                    placeholder="enter post description"
+                                    
+                                />
+                                <TextInput
+                                    style={[styles.input,{height:normalize(75)}]}
+                                    onChangeText={onChangeImg}
+                                    value={imgg}
+                                    multiline={true}
+                                    textAlignVertical={'top'}
+                                    placeholder="enter post image link"
+                                />
+                                <TouchableOpacity
+                                    onPress={selectOneFile}
+                                    style={styles.uploadView}
+                                >
+                                    <Text style={styles.inputButtontText}>Upload Image</Text>
+                                </TouchableOpacity>
+                                <Button title="send" onPress={Create}></Button>
+                                <Text style={styles.res}>{respf}</Text>
+                            </View>
+                    </LinearGradient>
+                
+                </ScrollView>
+            </SafeAreaView>
+        </ImageBackground>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -149,13 +144,13 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign:'center',
         marginBottom:normalize(7),
-        marginTop:normalize(30),
+        marginTop:normalize(10),
     },
     backLinearGradient:{
         borderColor:'white',
         borderWidth:normalize(1),
         borderRadius:15,
-        height:normalize(500),
+        height:normalize(465),
         marginHorizontal:'5%',
         marginTop:normalize(5),
     },
@@ -170,7 +165,7 @@ const styles = StyleSheet.create({
         borderColor:'white',
         borderBottomWidth:normalize(2),
         color:'black',
-        marginBottom:normalize(20),
+        marginBottom:normalize(18),
         height:normalize(45),
         borderRadius:5,
         paddingLeft:normalize(10),
@@ -188,7 +183,7 @@ const styles = StyleSheet.create({
         height:normalize(30),
         borderColor:'white',
         borderBottomWidth:normalize(2),
-        marginBottom:normalize(20),
+        marginBottom:normalize(18),
         paddingLeft:normalize(10),
         paddingTop:normalize(5),
     },

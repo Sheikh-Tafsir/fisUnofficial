@@ -23,7 +23,7 @@ const Home = (props) => {
                 navigation.navigate("Login");
             }
             else{
-                navigation.navigate("Homes");
+                navigation.navigate("Tub");
             }
         })
     };

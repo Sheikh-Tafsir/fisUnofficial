@@ -79,7 +79,7 @@ const Signup = () => {
                         console.log(error);
                     });
                     onChangeRespf("Signing up");
-                    navigation.navigate("Homes");
+                    navigation.navigate("Tub");
                 }
             });
         }

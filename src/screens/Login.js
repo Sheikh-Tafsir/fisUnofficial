@@ -75,7 +75,7 @@ const Login = () => {
                     if(pass === password){
                         onChangeRespf("Loggin in");
                         AsyncStorage.setItem('any_key_here',username);
-                        navigation.navigate("Homes");
+                        navigation.navigate("Tub");
                     }
                     else{
                         onChangeRespf("username or password is wrong");

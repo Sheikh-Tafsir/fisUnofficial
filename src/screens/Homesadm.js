@@ -15,11 +15,6 @@ const Homesadm = () => {
   return (
     <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.image}>
     <SafeAreaView style={styles.container}>
-      <View style={[styles.menu,{transform: [
-                              { translateY: normalize(585)},
-                          ],  }]}>
-              <Menu ></Menu> 
-      </View>
       <ScrollView style={styles.scrollView}> 
         <View style={styles.menudesc}>
           <Text style={styles.header}>Xplore</Text>

@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Dimensions,PixelRatio,StyleSheet, Text, View, Image, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from './src/screens/Home';
 import About from './src/screens/About';
@@ -23,7 +24,8 @@ import Login from './src/screens/Login';
 import Signup from './src/screens/Signup';
 import Loginadm from './src/screens/Loginadm';
 import Homesadm from './src/screens/Homesadm';
-
+import Tub from './src/component/Tub';
+import Tubadm from './src/component/Tubadm';
 
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
@@ -39,6 +41,7 @@ const normalize = (size) => {
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
 
   return (
     <NavigationContainer>
@@ -47,17 +50,12 @@ export default function App() {
           {(props)=> <Home {...props} channelName=
           {"wonder Intersteller"}/>}
         </Stack.Screen>
+        
 
         <Stack.Screen name="Homes" component={Homes}
-          /*options={{
-            headerTitleStyle:{
-              fontSize:25,
-            },
-            headerTitleAlign:'center',
-          }}*/
           options={{ 
+            headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
-            /*headerBackVisible:false,*/
             headerTintColor: 'white',
             headerStyle: {
               backgroundColor: '#0b0f1e',
@@ -66,7 +64,14 @@ export default function App() {
         />
         
         <Stack.Screen name="UserData" component={UserData}
+          /*options={{
+            headerTitleStyle:{
+              fontSize:25,
+            },
+            headerTitleAlign:'center',
+          }}*/
           options={{
+            /*headerBackVisible:false,*/
             headerTitleStyle:{
               fontSize:25,
             },
@@ -77,7 +82,6 @@ export default function App() {
         <Stack.Screen name="About" component={About}
            options={{ 
             headerTitle: (props) => <Logo {...props} />,
-            /*headerBackVisible:false,*/
             headerTintColor: 'white',
             headerStyle: {
               backgroundColor: '#0b0f1e',
@@ -215,7 +219,29 @@ export default function App() {
             },
           }}
         />
-        </Stack.Navigator>
+
+        <Stack.Screen name="Tub" component={Tub}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Tubadm" component={Tubadm}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

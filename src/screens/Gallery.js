@@ -16,15 +16,7 @@ const normalize = (size) => {
 const Gallery = () => {
   return (
     <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
-        
-        <SafeAreaView style={styles.container}>
-
-        <View style={[styles.menu,{transform: [
-                            { translateY: normalize(585)},
-                        ],  }]}>
-            <Menu ></Menu> 
-        </View>
-        
+        <SafeAreaView style={styles.container}>        
             <ScrollView style={styles.scrollView}>   
                 <Text style={styles.title}>Gallery</Text>   
                 <View style={styles.galBox}>
@@ -96,7 +88,7 @@ const styles = StyleSheet.create({
         height:"100%",
     },
     container:{
-        height:"95%",
+        height:"100%",
     },
     scrollView: {
         width:'92%',
@@ -108,7 +100,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign:'center',
         marginBottom:normalize(5),
-        marginTop:normalize(30),
+        marginTop:normalize(10),
     },
     galBox:{
         flex:3,

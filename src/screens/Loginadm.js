@@ -53,7 +53,7 @@ const Loginadm = () => {
             if(username === "tafsir" && password === "tafsir12"){
                 onChangeRespf("Loggin in");
                 AsyncStorage.setItem('any_key_here',username);
-                navigation.navigate("Homesadm");
+                navigation.navigate("Tubadm");
             }
             else{
                 onChangeRespf("username or password is wrong");

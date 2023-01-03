@@ -95,15 +95,11 @@ const Fetc = () => {
     
 
     return (
-        
         <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
-            <Text style={styles.title}>Our Events</Text>
-            <TouchableOpacity onPress={()=>navigation.navigate("Pushc")} style={styles.buttonStyle}>
-                <Text  style={styles.btn}>create post</Text>
-            </TouchableOpacity>
-            {/*<Button title="read doc" onPress={() => Read()}></Button>*/}
+            
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollview}> 
+                <Text style={styles.title}>Our Events</Text>
                     {
                         employeeList.map((curElem,id)=>{
                             return (
@@ -142,9 +138,9 @@ const styles = StyleSheet.create({
     backImage:{
         height:"100%",
     },
+
     container:{
-        marginTop:'3%',
-        marginBottom:'19%',
+        height:"100%",
     },
     scrollview:{
         height:'100%',
@@ -155,19 +151,10 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign:'center',
         marginBottom:5,
-        marginTop:10,
+        marginTop:normalize(15),
+        marginBottom:normalize(0),
     },
-    buttonStyle:{
-        height:'4%',
-        width:'70%',
-        marginHorizontal:'15%',
-        backgroundColor:'blue',
-    },
-    btn:{
-        textAlign:'center',
-        color:'white',
-        fontSize:normalize(16),
-    },
+
     backLinearGradient:{
         borderColor:'white',
         borderWidth:0.7,
