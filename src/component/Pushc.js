@@ -77,7 +77,7 @@ const Pushc = () => {
 
   return (
     <KeyboardAvoidingView behaviour={Platform.OS === 'ios' ? 'padding' : null}>
-        <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
+        <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/02/Cute-Little-Stars-iPhone-Wallpaper.jpg" }} resizeMode="cover" style={styles.backImage}>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
                     <Text style={styles.title}>Create post</Text>

@@ -1,5 +1,5 @@
 import { SafeAreaView,ScrollView, Dimensions,PixelRatio, TouchableOpacity, StyleSheet, Text, View, ImageBackground, Image, Linking, Button } from 'react-native'
-import React from 'react'
+import {React,useState,useEffect} from 'react'
 import Menu from '../component/Menu';
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
@@ -17,83 +17,111 @@ const normalize = (size) => {
 };
 
 const About = () => {
+  const [username, setUsername] = useState();
   const navigation=useNavigation();
   const LogoutFunc = ()=>{
     AsyncStorage.setItem('any_key_here','');
     navigation.navigate("Home");
   }
+  const findUserName = () =>{
+    AsyncStorage.getItem('any_key_here')
+        .then((value)=>{
+          setUsername(value);  
+        })
+  };
+  useEffect(() => {
+    findUserName();
+  }, []);
   
   return (
-    <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
+    <LinearGradient colors={['#0b0f1e', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
       <SafeAreaView style={styles.container}>
-
         <ScrollView style={styles.scrollView}> 
           <View style={styles.mainContainer}>
-            <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
-              <View style={styles.descPart}>
-                <Text style={styles.title}>Get in touch</Text>
-                <Text  style={styles.titleDesc}>We'd love to hear from you. Our team is always here to help</Text>
-                
-                <View style={styles.contPoints}>
-                  <Text style={styles.pointHead}>Follow us</Text>
-                  <Text style={styles.pointDesc}>You can follow us here</Text>
-                  <Text style={styles.pointMain} onPress={() => Linking.openURL('https://twitter.com/al_iut')}>Twitter</Text>
-                  <Text style={styles.pointMain} onPress={() => Linking.openURL('https://www.instagram.com/iut_interstellar_society/?fbclid=IwAR0-E3FFs0NCNpl5JQsDGGLNY4wNl2V_FLblPzmCyfnXu5YKgg9rkWrrgMs')}>Instagram</Text>
-                </View>
-                <View style={styles.contPoints}>
-                  <Text style={styles.pointHead}>Our Location</Text>
-                  <Text style={styles.pointDesc}>Come and greet us</Text>
-                  <Text style={styles.pointMain} >Islamic University of Technology, Board Bazar Road, Gazipur, Bangladesh, 1704</Text>
-                </View>
-                <View style={styles.contPoints}>
-                  <Text style={styles.pointHead}>Contact us</Text>
-                  <Text style={styles.pointDesc}>We are always open</Text>
-                  <Text  style={styles.pointMain} onPress={() => Linking.openURL('https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvqKMHmvPNNtQzcFXVtrtJBDzscxhJhXMxJMgzLSslBDFmPkXrPNhHXGvRSjgvgXlbLTsB')}>iutfis2061@gmail.com</Text>
+            <Text style={styles.titleUserName}>Hi {username}</Text>
+            <Text style={styles.titleUserText}>Have a great day</Text>
+              
+              <View style={styles.devContainer}>
+                <Text style={styles.devContainerTitle}>Mobile App design Team</Text>
+                <Text style={styles.devContainerSubTitle}>Tafsir, Rifa & Fateen</Text>
+                <View style={styles.devSubContainer}>
+                  <Image style={styles.devImgStyle}
+                    source={require("../images/m2.jpg")}
+                    resizeMode="contain"  
+                  />
+                  <Image style={styles.devImgStyle}
+                    source={require("../images/m2.jpg")}
+                    resizeMode="contain"  
+                  />
+                  <Image style={styles.devImgStyle}
+                    source={require("../images/m2.jpg")}
+                    resizeMode="contain"  
+                  />
                 </View>
               </View>
-              <TouchableOpacity onPress={() => LogoutFunc()} style={styles.logoutBut}>
-                  <Text style={styles.logoutButText}>Log out</Text>
-              </TouchableOpacity>
-        
-              {/*<View style={styles.footerLogo}>
-                <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/IUTFIS')}>
-                <Image
-                    style={styles.logoStyle}
-                    source={{uri:"https://png.pngtree.com/template/20190716/ourmid/pngtree-facebook-black-logo-free-png-image_227915.jpg"}}
-                />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/iut_interstellar_society/?fbclid=IwAR0-E3FFs0NCNpl5JQsDGGLNY4wNl2V_FLblPzmCyfnXu5YKgg9rkWrrgMs')}>
-                  <Image
-                      style={styles.logoStyle}
-                      source={{uri:"https://png.pngtree.com/png-clipart/20180626/ourmid/pngtree-instagram-icon-instagram-logo-png-image_3584911.png"}}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => Linking.openURL('https://twitter.com/al_iut')}>
-                  <Image
-                      style={styles.logoStyle}
-                      source={{uri:"https://png.pngtree.com/element_our/sm/20180626/sm_5b3222809f06e.jpg"}}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => Linking.openURL('https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvqKMHmvPNNtQzcFXVtrtJBDzscxhJhXMxJMgzLSslBDFmPkXrPNhHXGvRSjgvgXlbLTsB')}>
-                  <Image
-                      style={styles.logoStyle}
-                      source={{uri:"https://png.pngtree.com/png-vector/20190120/ourmid/pngtree-email-vector-icon-png-image_470655.jpg"}}
-                    />
-                </TouchableOpacity>
-              </View>*/}
+              
+              <View style={styles.contactsContainer}>
+                <View style={styles.descPart}>
+                  <Text style={styles.contTitle}>Get in touch</Text>
+                  <Text  style={styles.contDesc}>We'd love to hear from you. Our team is always here to help</Text>
+                </View>
 
-            </LinearGradient>
+          
+                <View style={styles.footerLogo}>
+                  <View style={styles.footerLogoSub}>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/IUTFIS')}>
+                      <Image
+                          style={styles.logoStyle}
+                          source={{uri:"https://png.pngtree.com/template/20190716/ourmid/pngtree-facebook-black-logo-free-png-image_227915.jpg"}}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/iut_interstellar_society/?fbclid=IwAR0-E3FFs0NCNpl5JQsDGGLNY4wNl2V_FLblPzmCyfnXu5YKgg9rkWrrgMs')}>
+                      <Image
+                          style={styles.logoStyle}
+                          source={{uri:"https://png.pngtree.com/png-clipart/20180626/ourmid/pngtree-instagram-icon-instagram-logo-png-image_3584911.png"}}
+                        />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.footerLogoSub}>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://twitter.com/al_iut')}>
+                      <Image
+                          style={styles.logoStyle}
+                          source={{uri:"https://png.pngtree.com/element_our/sm/20180626/sm_5b3222809f06e.jpg"}}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvqKMHmvPNNtQzcFXVtrtJBDzscxhJhXMxJMgzLSslBDFmPkXrPNhHXGvRSjgvgXlbLTsB')}>
+                      <Image
+                          style={styles.logoStyle}
+                          source={{uri:"https://png.pngtree.com/png-vector/20190120/ourmid/pngtree-email-vector-icon-png-image_470655.jpg"}}
+                        />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.contactsContainer}>
+                <View style={styles.logoutButCont}>
+                  <TouchableOpacity onPress={() => LogoutFunc()} style={styles.logoutBut}>
+                    <Image
+                          style={styles.logooutButImg}
+                          source={{uri:"https://thumbs.dreamstime.com/b/logout-isolated-special-cyan-blue-round-button-abstract-illustration-logout-special-cyan-blue-round-button-103957079.jpg"}}
+                        />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              
+
           </View>
         </ScrollView>
       </SafeAreaView>
-    </ImageBackground>
+    </LinearGradient>
   )
 }
 
 
 const styles = StyleSheet.create({
-  backImage:{
-    height:"100%",
+  backLinearGradient:{
+    height:'100%',
+    width:'100%',
   },
   container:{
     height:'100%',
@@ -105,84 +133,136 @@ const styles = StyleSheet.create({
     width:'100%',
     height:'100%',  
   },
-  backLinearGradient:{
-    height:normalize(480),
-    width:'90%',
+  titleUserName:{
+    color:'white',
+    fontSize:normalize(25),
+    fontWeight:'bold',
     marginHorizontal:'5%',
-    marginTop:normalize(23),
-    borderColor:'white',
-    borderWidth:normalize(0.7),
-    borderRadius:15,
+    marginTop:normalize(25),
+  },
+  titleUserText:{
+    color:'white',
+    fontSize:normalize(16),
+    fontWeight:'bold',
+    marginHorizontal:'5%',
     marginBottom:normalize(20),
   },
-  descPart:{
-    height:normalize(390),
-    marginTop:normalize(17),
-    marginBottom:normalize(15),
+
+  devContainer:{
+    height:normalize(120),
+    width:'90%',
+    marginHorizontal:'5%',
+    backgroundColor:"#fdab00",
+    borderRadius:15,
+    paddingHorizontal:'5%',
+    marginBottom:'3.5%',
+    borderWidth:0.5,
+    borderColor:'white',
   },
-  title:{
+  devContainerTitle:{
     color:'white',
-    fontSize:normalize(30),
-    marginHorizontal:'7%',
-    fontWeight:'bold',
-  },
-  titleDesc:{
+    fontSize:normalize(17),
+    marginTop:normalize(15),
+    marginBottom:normalize(4),
+    
+  },  
+  devContainerSubTitle:{
     color:'white',
-    marginHorizontal:'7%',
-    marginTop:normalize(10),
-    fontSize:normalize(15),
-    width:'80%',
+    fontSize:normalize(12),
+    marginBottom:normalize(12),
   },
-  contPoints:{
-    marginHorizontal:'7%',
+  devSubContainer:{
+    flex: 1,
+    flexDirection:'row'
   },
-  pointHead:{
-    fontWeight:'bold',
-    fontSize:normalize(19),
-    color:'white',
-    marginTop:normalize(26),
-    marginBottom:'1.5%',
+  devImgStyle:{
+    width:'15%',
+    aspectRatio:1,
+    borderRadius:50,
+    marginRight:normalize(2),
+    borderWidth:2,
+    borderColor:'white',
   },
-  pointDesc:{
-    fontSize:16,
-    color:'rgb(230,230,230)',
-    width:'80%',
-    marginBottom:normalize(2),
-  },
-  pointMain:{
-    color:'white',
-    fontSize:normalize(15),
-    width:'80%', 
-  },
-  /*footerLogo:{
+
+  contactsContainer:{
     flex:1,
     flexDirection:'row',
-    width:'50%',
-    marginHorizontal:'25%',
-    height:normalize(5),
+    marginHorizontal:'5%',
+    marginVertical:'3%',
+    
+    
+  },
+  descPart:{
+    height:normalize(130),
+    width:'47%',
+    backgroundColor:"#ff4869",
+    borderRadius:15,
+    paddingHorizontal:'5%',
+    marginRight:'5%',
+    paddingTop:'5%',
+    borderWidth:0.5,
+    borderColor:'white',
+  },
+  contTitle:{
+    color:'white',
+    fontSize:normalize(17),
+    marginBottom:normalize(10),
+    
+  },
+  contDesc:{
+    color:'white',
+    fontSize:normalize(13),
+    lineHeight:normalize(16),
+    
+  },
+
+  footerLogo:{
+    height:normalize(130),
+    width:'47%',
+    backgroundColor:"#02bade",
+    borderRadius:15,
+    paddingHorizontal:'5%',
+    paddingTop:'5%',
+    borderWidth:0.5,
+    borderColor:'white',
+  },
+  footerLogoSub:{
+    flex:1,
+    flexDirection:'row',
+
   },
   logoStyle:{
-    width:35,
+    width:'62%',
     height:undefined,
     aspectRatio:1,
-    resizeMode : 'stretch',
-    borderRadius:50,
-    marginRight:15,
-  },*/
+    resizeMode : 'contain',
+    borderRadius:10,
+  },
+
+  logoutButCont:{
+    height:normalize(130),
+    width:'48%',
+    backgroundColor:"#8364f9",
+    borderRadius:15,
+    paddingHorizontal:'5%',
+    paddingVertical:'4%',
+    marginRight:'5%',
+    borderWidth:0.5,
+    borderColor:'white',
+
+  },
   logoutBut:{
-    backgroundColor:'white',
-    width:'70%',
-    height:normalize(25),
-    marginHorizontal:'15%',
-    marginTop:normalize(20),
+    width:'100%',
+    aspectRatio:1,
+ 
   },
-  logoutButText:{
-    textAlign:'center',
-    color:'#023050',
-    fontSize:20,
-    fontWeight:'bold',
-    lineHeight:normalize(24),
+  logooutButImg:{
+    width:'97%',
+    aspectRatio:1,
+    borderRadius:50,
+    marginTop:'2%',
   },
+
   menu:{
     marginTop:normalize(-70),
     zIndex:100,

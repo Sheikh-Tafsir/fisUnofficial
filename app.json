@@ -4,12 +4,12 @@
     "slug": "native_proj",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/andricon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#023050"
+      "resizeMode": "center",
+      "backgroundColor": "black"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/andricon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.sheikh_tafsir_rahman.native_proj"

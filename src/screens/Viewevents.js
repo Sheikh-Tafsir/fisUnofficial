@@ -72,7 +72,7 @@ const Viewevents = () => {
             });
     };  
   return (
-    <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
+    <ImageBackground source={{uri:"https://img.freepik.com/premium-photo/beautiful-moon-galaxy-with-wolf_342788-224.jpg?w=2000" }} resizeMode="cover" style={styles.backImage}>
         <AnimatedLoader
             visible={visible}
             overlayColor="rgba(255,255,255,0.75)"

@@ -26,7 +26,7 @@ const Tub = () => {
     const Tab = createBottomTabNavigator();
   return (
       <Tab.Navigator>
-        <Tab.Screen name="Homes" component={Homes} 
+        <Tab.Screen name="Fetc" component={Fetc} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -45,12 +45,14 @@ const Tub = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Home",
+    
             
           }}
         />
 
-        <Tab.Screen name="Fetc" component={Fetc} 
+        <Tab.Screen name="Team" component={Team} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -69,7 +71,8 @@ const Tub = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Team",
           }}
         />
 
@@ -92,7 +95,8 @@ const Tub = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Gallery",
           }}
         />
         
@@ -115,7 +119,8 @@ const Tub = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Events",
           }}
         />
 
@@ -138,7 +143,8 @@ const Tub = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Dashboard",
           }}
         />
 

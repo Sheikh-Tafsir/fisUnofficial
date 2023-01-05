@@ -16,7 +16,7 @@ const normalize = (size) => {
   };
 const Team = () => {
   return (
-    <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
+    <ImageBackground source={{uri:"https://www.pixelstalk.net/wp-content/uploads/2016/04/Beautiful-night-sky-background-wallpapers-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}> 
                 <Text style={styles.title}>Our Team</Text>
@@ -26,24 +26,24 @@ const Team = () => {
                     renderItem={teamCard}
                     style={styles.scrollPart}
                 />*/}
-                {Teamgal.map((item) => {
-                    return (
-                    <View key={item.id}>
-                        <View style={styles.mainContainer}>
-                            <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient} >
-                                <Image style={styles.imgStyle}
-                                        source={item.image}
-                                        resizeMode="contain"  
-                                    />
-                                <View style={styles.cardDesc}>
-                                    <Text style={styles.cardName}>{item.name}</Text>
-                                    <Text style={styles.cardPos}>{item.pos}</Text>
-                                </View>
-                            </LinearGradient>
-                        </View>
-                    </View>
-                    );
-                })}
+                <View style={styles.wrapContainer}>
+                    {Teamgal.map((item) => {
+                        return (
+                            <View style={styles.mainContainer} key={item.id}>
+                                <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient} >
+                                    <Image style={styles.imgStyle}
+                                            source={item.image}
+                                            resizeMode="contain"  
+                                        />
+                                    <View style={styles.cardDesc}>
+                                        <Text style={styles.cardName}>{item.name}</Text>
+                                        <Text style={styles.cardPos}>{item.pos}</Text>
+                                    </View>
+                                </LinearGradient>
+                            </View>
+                        );
+                    })}
+                </View>
             </ScrollView>
         </SafeAreaView>
 
@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
         fontSize:normalize(27),
         fontWeight:'bold',
         textAlign:'center',
-        marginBottom:normalize(0),
-        marginTop:normalize(10),
+        marginBottom:normalize(20),
+        marginTop:normalize(20),
     },
     container:{
         height:'100%',
@@ -71,33 +71,37 @@ const styles = StyleSheet.create({
     scrollView:{
         height:'100%',
     },
-    mainContainer:{
-        width:'70%',
-        marginHorizontal:'15%',
-        marginVertical:normalize(13),
-        
+    wrapContainer:{
+        flex:1,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        marginHorizontal:'3%',
     },
+    mainContainer:{
+        width:'46%',
+        marginHorizontal:'2%',
+    },
+
     backLinearGradient:{
         borderColor:'white',
-        borderWidth:normalize(0.7),
+        borderWidth:0.7,
         borderRadius:15,
+        height:normalize(218),
+        marginBottom:normalize(20),
     },
     imgStyle:{
         height:undefined,
-        width:'86%',
+        width:'82%',
         aspectRatio:1,
-        marginHorizontal: '7%',
-        marginTop:normalize(27),
-        marginBottom:normalize(9),
+        marginHorizontal: '9%',
+        marginTop:normalize(15),
+        marginBottom:normalize(10),
         borderRadius:10,
         shadowColor: 'black',
     },
     cardDesc:{
         width:'84%',
         marginHorizontal: '8%',
-        marginBottom:normalize(18),
-        
-
     },
     cardName:{
         textAlign:'center',

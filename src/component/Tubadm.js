@@ -48,7 +48,8 @@ const Tubadm = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Home",
             
           }}
         />
@@ -73,7 +74,8 @@ const Tubadm = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "New post",
           }}
         />
 
@@ -96,11 +98,12 @@ const Tubadm = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "View Events",
           }}
         />
 
-<Tab.Screen name="Eventadm" component={Eventadm} 
+        <Tab.Screen name="Eventadm" component={Eventadm} 
           options={{ 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -120,7 +123,8 @@ const Tubadm = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Create Events",
           }}
         />
 
@@ -143,7 +147,8 @@ const Tubadm = () => {
             shifting:true,
             tabBarStyle:{
               height:'8%',
-            }
+            },
+            tabBarLabel: "Dashboard",
           }}
         />
       </Tab.Navigator>

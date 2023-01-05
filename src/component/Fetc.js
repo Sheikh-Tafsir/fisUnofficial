@@ -95,11 +95,14 @@ const Fetc = () => {
     
 
     return (
-        <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
+        <ImageBackground source={{uri:"https://w0.peakpx.com/wallpaper/108/744/HD-wallpaper-stars-abej-beograd.jpg" }} resizeMode="cover" style={styles.backImage}>
             
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollview}> 
-                <Text style={styles.title}>Our Events</Text>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>All our events and their information can be viewed here. We hope you enjoy</Text>
+                </View>
+                
                     {
                         employeeList.map((curElem,id)=>{
                             return (
@@ -145,14 +148,24 @@ const styles = StyleSheet.create({
     scrollview:{
         height:'100%',
     },
+    titleContainer:{
+        backgroundColor:'#0b0f1e',
+        width:'84%',
+        height:normalize(100),
+        marginHorizontal:'8%',
+        borderColor:'white',
+        borderWidth:0.7,
+        borderRadius:15,
+        marginTop:normalize(22),
+    },
     title:{
         color:'white',
-        fontSize:30,
+        fontSize:normalize(15),
         fontWeight:'bold',
-        textAlign:'center',
         marginBottom:5,
-        marginTop:normalize(15),
+        marginTop:normalize(22),
         marginBottom:normalize(0),
+        marginHorizontal:'5%',
     },
 
     backLinearGradient:{
