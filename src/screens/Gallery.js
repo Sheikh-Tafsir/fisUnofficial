@@ -18,6 +18,11 @@ const Gallery = () => {
     <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>        
             <ScrollView style={styles.scrollView}>   
+                <StatusBar
+                    animated={true}
+                    backgroundColor="#0b0f1e"
+                    barStyle="dark-content"
+                />
                 <Text style={styles.title}>Gallery</Text>   
                 <View style={styles.galBox}>
                     <Image

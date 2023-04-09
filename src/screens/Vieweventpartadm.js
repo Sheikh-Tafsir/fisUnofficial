@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from "react";
 import { addDoc, collection, doc, getDoc, setDoc,getDocs,updateDoc } from "firebase/firestore";
 import { StatusBar } from "react-native";
-import { Dimensions,PixelRatio,SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground } from "react-native";
+import { Dimensions,PixelRatio,SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 import { firebase } from '../component/Config';
@@ -43,7 +43,16 @@ const Vieweventpartadm = () => {
             getDocs(collection(db,"events")).then(docSnap=>{
                 
                 docSnap.forEach((doc)=>{
-                    users.push({ ...doc.data(),id:doc.id}); 
+                    var dateString = doc.data().eventdate;
+                    var date = new Date(dateString);
+                    var today = new Date();
+                    //console.log(date);
+                    if(date<=today){
+                        //do nothing
+                    }
+                    else{
+                        users.push({ ...doc.data(),id:doc.id});
+                    }
                 });
                 //console.log("document data:", users[0].username);
                 setEmployeeList([...users]);
@@ -62,6 +71,11 @@ const Vieweventpartadm = () => {
         </AnimatedLoader>
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollview}> 
+            <StatusBar
+                animated={true}
+                backgroundColor="#0b0f1e"
+                barStyle="dark-content"
+            />
             <Text style={styles.title}>Join Events</Text>
                 {
                     employeeList.map((curElem,id)=>{

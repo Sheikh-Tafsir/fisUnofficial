@@ -5,11 +5,11 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/andricon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/icon.png",
-      "resizeMode": "center",
-      "backgroundColor": "black"
+      "image": "./assets/splash.png",
+      "resizeMode":"contain",
+      "backgroundColor": "#013051"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

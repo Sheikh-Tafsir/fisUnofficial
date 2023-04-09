@@ -25,8 +25,10 @@ const normalize = (size) => {
   }
 };
 
+
 const Tubadm = () => {
     const Tab = createBottomTabNavigator();
+    
   return (
       <Tab.Navigator initialRouteName="Homesadm">
         <Tab.Screen name="Homesadm" component={Homesadm} 
@@ -53,9 +55,9 @@ const Tubadm = () => {
             
           }}
         />
-        
+      
         <Tab.Screen name="Pushc" component={Pushc} 
-          options={{ 
+          options={{ //this component create blog
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {
@@ -80,7 +82,7 @@ const Tubadm = () => {
         />
 
         <Tab.Screen name="Vieweventpartadm" component={Vieweventpartadm} 
-          options={{ 
+          options={{ //this component checks participant couns in events
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {
@@ -103,8 +105,9 @@ const Tubadm = () => {
           }}
         />
 
+        
         <Tab.Screen name="Eventadm" component={Eventadm} 
-          options={{ 
+          options={{ //this component create events
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {
@@ -129,7 +132,7 @@ const Tubadm = () => {
         />
 
         <Tab.Screen name="About" component={About} 
-          options={{ 
+          options={{ //this component is profile of admin
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {

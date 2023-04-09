@@ -25,9 +25,10 @@ const normalize = (size) => {
 const Tub = () => {
     const Tab = createBottomTabNavigator();
   return (
+    
       <Tab.Navigator>
         <Tab.Screen name="Fetc" component={Fetc} 
-          options={{ 
+          options={{ //this component views blog
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {
@@ -53,7 +54,7 @@ const Tub = () => {
         />
 
         <Tab.Screen name="Team" component={Team} 
-          options={{ 
+          options={{ //this component views team members
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {
@@ -77,7 +78,7 @@ const Tub = () => {
         />
 
         <Tab.Screen name="Gallery" component={Gallery} 
-          options={{ 
+          options={{ //this component views different photos
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {
@@ -101,7 +102,7 @@ const Tub = () => {
         />
         
         <Tab.Screen name="Viewevents" component={Viewevents} 
-          options={{ 
+          options={{ //this component views and participates in events
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {
@@ -125,7 +126,7 @@ const Tub = () => {
         />
 
         <Tab.Screen name="About" component={About} 
-          options={{ 
+          options={{ //this component is user profile 
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
             headerStyle: {

@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
+import { StatusBar,KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
 import {React,useState, useEffect} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
@@ -76,6 +76,11 @@ const Loginadm = () => {
             </AnimatedLoader>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
+                    <StatusBar
+                        animated={true}
+                        backgroundColor="#0b0f1e"
+                        barStyle="dark-content"
+                    />
                     <View style={styles.form}>
                         <Text style={styles.headTitle}>Welcome</Text>
                         <Text style={styles.headTitle}>Admin!</Text>
@@ -101,7 +106,7 @@ const Loginadm = () => {
                             placeholderTextColor="rgb(30,30,30)" 
                             /*ref={this.passTextInput}*/
                         />
-                        
+
                         <TouchableOpacity
                             style={styles.inputButton}
                             onPress={()=>CheckLogin()}>

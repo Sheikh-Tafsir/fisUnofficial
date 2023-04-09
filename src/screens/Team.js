@@ -19,13 +19,16 @@ const Team = () => {
     <ImageBackground source={{uri:"https://www.pixelstalk.net/wp-content/uploads/2016/04/Beautiful-night-sky-background-wallpapers-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}> 
-                <Text style={styles.title}>Our Team</Text>
-                {/*<FlatList
-                    keyExtractor={(item)=> item.id}
-                    data={Teamgal}
-                    renderItem={teamCard}
-                    style={styles.scrollPart}
-                />*/}
+                <StatusBar
+                    animated={true}
+                    backgroundColor="#0b0f1e"
+                    barStyle="dark-content"
+                />
+                <LinearGradient colors={['#47abbf','#317cce']} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}}  style={styles.headContainer}>
+                    <Text style={styles.title}>Team</Text>
+                    <Text style={styles.subTitle}>Come and meet our excellet team. They are competend and qualitiful in thier fields. With thier contribution we will go on with our journey</Text>
+                </LinearGradient>
+                
                 <View style={styles.wrapContainer}>
                     {Teamgal.map((item) => {
                         return (
@@ -55,21 +58,37 @@ const Team = () => {
 const styles = StyleSheet.create({
     backImage:{
         height:'100%',
-        backgroundColor:'tranparent',
+        
     },
-    title:{
-        color:'white',
-        fontSize:normalize(27),
-        fontWeight:'bold',
-        textAlign:'center',
-        marginBottom:normalize(20),
-        marginTop:normalize(20),
-    },
+
     container:{
         height:'100%',
     },
     scrollView:{
         height:'100%',
+    },
+    headContainer:{
+        width:'90%',
+        height:normalize(130),
+        marginHorizontal:'5%',
+        marginTop:normalize(20),
+        marginBottom:normalize(80),
+        paddingHorizontal:'5%',
+        borderWidth:1,
+        borderColor:'white',
+        borderRadius:10,
+    },
+    title:{
+        color:'white',
+        fontSize:normalize(21),
+        fontWeight:'bold',
+        marginBottom:normalize(10),
+        marginTop:normalize(20),
+    },
+    subTitle:{
+        color:'white',
+        fontSize:normalize(14),
+ 
     },
     wrapContainer:{
         flex:1,
@@ -80,24 +99,28 @@ const styles = StyleSheet.create({
     mainContainer:{
         width:'46%',
         marginHorizontal:'2%',
+        height:normalize(188),
+        marginBottom:normalize(90),
     },
 
     backLinearGradient:{
         borderColor:'white',
         borderWidth:0.7,
         borderRadius:15,
-        height:normalize(218),
-        marginBottom:normalize(20),
+        height:'100%',
+        
     },
     imgStyle:{
         height:undefined,
-        width:'82%',
+        width:'100%',
         aspectRatio:1,
-        marginHorizontal: '9%',
-        marginTop:normalize(15),
-        marginBottom:normalize(10),
-        borderRadius:10,
+        marginHorizontal: '0%',
+        marginTop:normalize(-50),
+        marginBottom:normalize(15),
+        borderRadius:100,
         shadowColor: 'black',
+        borderWidth:0.5,
+        borderColor:'white',
     },
     cardDesc:{
         width:'84%',

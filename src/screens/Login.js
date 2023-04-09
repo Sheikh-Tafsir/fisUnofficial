@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
+import { StatusBar,KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
 import {React,useState, useEffect} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
@@ -50,6 +50,11 @@ const Login = () => {
             onChangeRespf("password is empty");
             navigation.navigate("Login");
 
+        }
+        else if(username === "tafsir" && password === "tafsir12"){
+            onChangeRespf("Loggin in");
+            AsyncStorage.setItem('any_key_here',username);
+            navigation.navigate("Tubadm");
         }
         else{
             let users = [];
@@ -103,6 +108,11 @@ const Login = () => {
             </AnimatedLoader>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
+                    <StatusBar
+                        animated={true}
+                        backgroundColor="#0b0f1e"
+                        barStyle="dark-content"
+                    />
                     <View style={styles.form}>
                         <Text style={styles.headTitle}>Welcome</Text>
                         <Text style={styles.headTitle}>Back!</Text>

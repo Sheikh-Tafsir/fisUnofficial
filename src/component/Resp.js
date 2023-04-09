@@ -23,7 +23,7 @@ const Resp = () => {
             <Text style={[styles.resp,{fontSize:normalize(27),marginTop:'10%'}]}>Post created</Text>
             <Text style={styles.resp}>Successfully</Text>
             <View style={styles.butVw}>
-                <Text style={styles.btn}  onPress={()=>navigation.navigate("Pushc")}>Create another</Text>
+                {/* <Text style={styles.btn}  onPress={()=>navigation.navigate("Pushc")}>Create another</Text> */}
                 <Text style={styles.btn}  onPress={()=>navigation.navigate("Home")}>Go Back</Text>
             </View>
         </LinearGradient>

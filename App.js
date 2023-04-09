@@ -4,6 +4,7 @@ import { Dimensions,PixelRatio,StyleSheet, Text, View, Image, Button } from 'rea
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import NavigationBar from 'react-native-navbar-color'
 
 import Home from './src/screens/Home';
 import About from './src/screens/About';
@@ -29,6 +30,7 @@ import Tubadm from './src/component/Tubadm';
 import Eventadm from './src/screens/Eventadm';
 import Viewevents from './src/screens/Viewevents';
 import Vieweventpartadm from './src/screens/Vieweventpartadm'
+import Vieweventsresp from './src/screens/Vieweventsresp';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -264,6 +266,16 @@ export default function App() {
         />
 
         <Stack.Screen name="Vieweventpartadm" component={Vieweventpartadm}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Vieweventsresp" component={Vieweventsresp}
           options={{ 
             headerTitle: (props) => <Logo {...props} />,
             headerTintColor: 'white',

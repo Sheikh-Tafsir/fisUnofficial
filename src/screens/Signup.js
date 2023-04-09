@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
+import { StatusBar,KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
 import {React,useState, useEffect} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
@@ -99,6 +99,11 @@ const Signup = () => {
             </AnimatedLoader>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
+                    <StatusBar
+                        animated={true}
+                        backgroundColor="#0b0f1e"
+                        barStyle="dark-content"
+                    />
                     <View style={styles.form}>
                         <Text style={styles.title}>Signup Here</Text>
                         <Text style={styles.subTitle}>We are happy to see you here!</Text>

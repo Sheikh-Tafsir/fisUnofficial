@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
+import { StatusBar,KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform} from "react-native";
 import {React, useState, useCallback} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
@@ -26,10 +26,17 @@ const Eventadm = () => {
   const db = getFirestore();
   const [head, onChangeHead] = useState();
   const [date, onChangeDate] = useState();
+  const [day, onChangeDay] = useState();
+  const [month, onChangeMonth] = useState();
+  const [year, onChangeYear] = useState();
   const [desc, onChangeDesc] = useState();
   const [imgg, onChangeImg] = useState();
   const [respf, onChangeRespf] = useState();
   const [image, setImage] = useState(null);
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+
       
   const Create = () => {
       if(head==null || head==''){
@@ -85,6 +92,11 @@ const Eventadm = () => {
         <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
+                    <StatusBar
+                        animated={true}
+                        backgroundColor="#0b0f1e"
+                        barStyle="dark-content"
+                    />
                     <Text style={styles.title}>Create Event</Text>
                     <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
                             <View style={styles.form}>
@@ -95,14 +107,28 @@ const Eventadm = () => {
                                     textAlignVertical={'top'}
                                     placeholder="Event name"
                                 />
+                                
                                 <TextInput
                                     style={styles.input}
                                     onChangeText={onChangeDate}
                                     value={date}
                                     textAlignVertical={'top'}
-                                    placeholder="Event date/month/year"
-                                    
+                                    placeholder="Event Date: YYYY-MM-DD"
                                 />
+                                {/* <TextInput
+                                    style={styles.input}
+                                    onChangeText={onChangeMonth}
+                                    value={month}
+                                    textAlignVertical={'top'}
+                                    placeholder="Event Month: MM"
+                                />
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={onChangeYear}
+                                    value={year}
+                                    textAlignVertical={'top'}
+                                    placeholder="Event Year: YYYY"
+                                /> */}
                                 <TextInput
                                     style={[styles.input,{height:normalize(180)}]}
                                     onChangeText={onChangeDesc}

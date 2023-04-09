@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
+import { StatusBar,KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
 import {React, useState, useCallback} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
@@ -80,6 +80,11 @@ const Pushc = () => {
         <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/02/Cute-Little-Stars-iPhone-Wallpaper.jpg" }} resizeMode="cover" style={styles.backImage}>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
+                    <StatusBar
+                        animated={true}
+                        backgroundColor="#0b0f1e"
+                        barStyle="dark-content"
+                    />
                     <Text style={styles.title}>Create post</Text>
                     <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
                             <View style={styles.form}>

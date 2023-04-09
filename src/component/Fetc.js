@@ -99,6 +99,11 @@ const Fetc = () => {
             
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollview}> 
+                <StatusBar
+                    animated={true}
+                    backgroundColor="#0b0f1e"
+                    barStyle="dark-content"
+                />
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>All our events and their information can be viewed here. We hope you enjoy</Text>
                 </View>

@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from "react";
 import { addDoc, collection, doc, getDoc, setDoc,getDocs,updateDoc } from "firebase/firestore";
-import { StatusBar } from "react-native";
-import { Dimensions,PixelRatio,SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground } from "react-native";
+import { RefreshControl, StatusBar, Dimensions,PixelRatio,SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 import { firebase } from '../component/Config';
@@ -30,25 +29,61 @@ const Viewevents = () => {
     const [asyncVal,setAsyncVal]=useState('');
     const [employeeList,setEmployeeList] = useState([]);
     const [visible, setVisible] = useState(false);
+    const [userinfo,onChangeUserinfo] = useState([]);
+    const [respf, onChangeRespf] = useState();
 
     const joinEvent = (eventname,eventdate,eventdec,eventimg,eventmem) => {
+
         AsyncStorage.getItem('any_key_here')
         .then((value)=>{
-            setAsyncVal(value);
-            eventmem.push(value);
-            
-            setDoc(doc(db,"events",eventname),{
-                eventname:eventname,
-                eventdate:eventdate,
-                eventdec:eventdec,
-                eventimg:eventimg,
-                eventmem:eventmem,
-            }).then(()=>{
-                console.log('event data submitted');
-            }).catch((error) =>{
-                console.log(error);
-            });
-            navigation.navigate("Home");
+
+            let users = [];
+            getDocs(collection(db,"eventparticipants")).then(docSnap=>{
+                let userEventName=value+eventname;
+                docSnap.forEach((doc)=>{
+                    if(doc.id == userEventName){
+                        users.push({ ...doc.data(),id:doc.id}); 
+                    }
+                });
+                
+                //console.log(users[0].password);
+                //console.log(pass+"b");
+                //alert(users.length);
+                
+                if(users.length >= 1){
+                    onChangeRespf("Already participation taken");
+                    navigation.navigate("Viewevents");
+                }
+                else{
+                    setAsyncVal(value);
+                    eventmem.push(value);
+                    
+                    //set data in events table
+                    setDoc(doc(db,"events",eventname),{
+                        eventname:eventname,
+                        eventdate:eventdate,
+                        eventdec:eventdec,
+                        eventimg:eventimg,
+                        eventmem:eventmem,
+                    }).then(()=>{
+                        console.log('event data submitted in events');
+                    }).catch((error) =>{
+                        console.log(error);
+                    });
+
+                    //set data in eventparticipants table
+                    setDoc(doc(db,"eventparticipants",value+eventname),{
+                        eventname:eventname,
+                        username:value,
+                    }).then(()=>{
+                        console.log('event data submitted in eventparticipants');
+                    }).catch((error) =>{
+                        console.log(error);
+                    });
+
+                    navigation.navigate("Vieweventsresp");
+                }
+            })
         })
     };
 
@@ -64,7 +99,16 @@ const Viewevents = () => {
             getDocs(collection(db,"events")).then(docSnap=>{
                 
                 docSnap.forEach((doc)=>{
-                    users.push({ ...doc.data(),id:doc.id}); 
+                    var dateString = doc.data().eventdate;
+                    var date = new Date(dateString);
+                    var today = new Date();
+                    //console.log(date);
+                    if(date<=today){
+                        //do nothing
+                    }
+                    else{
+                        users.push({ ...doc.data(),id:doc.id});
+                    }
                 });
                 //console.log("document data:", users[0].username);
                 setEmployeeList([...users]);
@@ -83,7 +127,13 @@ const Viewevents = () => {
         </AnimatedLoader>
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollview}> 
-            <Text style={styles.title}>Join Events</Text>
+
+                {/* <StatusBar
+                        animated={true}
+                        backgroundColor="#0b0f1e"
+                        barStyle="dark-content"
+                    /> */}
+                <Text style={styles.title}>Join Events</Text>
                 <View style={styles.subContainer}>
                 {
                     employeeList.map((curElem,id)=>{
@@ -98,6 +148,7 @@ const Viewevents = () => {
                                             style={styles.imgStyle}
                                             source={{uri:(curElem.eventimg)}}
                                         />
+                                        <Text style={styles.submitresp}>{respf}</Text>
                                         <TouchableOpacity style={styles.joinBut} onPress={()=>joinEvent(curElem.eventname, curElem.eventdate, curElem.eventdec, curElem.eventimg, curElem.eventmem)}>
                                             <Text style={styles.joinButText}>Join Now</Text>
                                         </TouchableOpacity>
@@ -129,7 +180,6 @@ const styles = StyleSheet.create({
     },
     scrollview:{
         height:'100%',
-        
     },
     title:{
         color:'white',
@@ -183,6 +233,12 @@ const styles = StyleSheet.create({
         marginHorizontal: '3%',
         marginBottom:25,
         borderRadius:7,
+    },
+    submitresp:{
+        textAlign:'center',
+        color:'red',
+        fontSize:15,
+        marginBottom:normalize(12),
     },
     joinBut:{
         color:'#023050',

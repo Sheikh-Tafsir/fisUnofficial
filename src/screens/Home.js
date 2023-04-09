@@ -1,4 +1,4 @@
-import {  TouchableOpacity, StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import {  TouchableOpacity, StyleSheet, Text, View, Image, ImageBackground, StatusBar } from 'react-native';
 import {React, Children, useState } from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
 import Menu from '../component/Menu';
@@ -32,6 +32,13 @@ const Home = (props) => {
     return (
     <View style={styles.mainContainer}>
         <ImageBackground source={require("../images/homeback.jpg")} resizeMode="cover" style={styles.image}>
+        <StatusBar
+            animated={false}
+            backgroundColor="#0b0f1e"
+            barStyle="dark-content"
+            showHideTransition="none"
+            
+        />
         {/*<LinearGradient colors={['rgb(27,26,31)', 'rgb(36,55,35)','rgb(27,26,31)' ]} style={styles.linearGradient}>*/}
             <View style={styles.homeTop}>
                 <View style={styles.headerImageVw}>

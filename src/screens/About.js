@@ -1,9 +1,10 @@
-import { SafeAreaView,ScrollView, Dimensions,PixelRatio, TouchableOpacity, StyleSheet, Text, View, ImageBackground, Image, Linking, Button } from 'react-native'
+import { SafeAreaView,ScrollView, Dimensions,PixelRatio, TouchableOpacity, StyleSheet, Text, View, ImageBackground, Image, Linking, Button, StatusBar } from 'react-native'
 import {React,useState,useEffect} from 'react'
 import Menu from '../component/Menu';
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
+
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -19,6 +20,7 @@ const normalize = (size) => {
 const About = () => {
   const [username, setUsername] = useState();
   const navigation=useNavigation();
+  
   const LogoutFunc = ()=>{
     AsyncStorage.setItem('any_key_here','');
     navigation.navigate("Home");
@@ -37,6 +39,11 @@ const About = () => {
     <LinearGradient colors={['#0b0f1e', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}> 
+          <StatusBar
+            animated={true}
+            backgroundColor="#0b0f1e"
+            barStyle="dark-content"
+          />
           <View style={styles.mainContainer}>
             <Text style={styles.titleUserName}>Hi {username}</Text>
             <Text style={styles.titleUserText}>Have a great day</Text>
@@ -46,7 +53,7 @@ const About = () => {
                 <Text style={styles.devContainerSubTitle}>Tafsir, Rifa & Fateen</Text>
                 <View style={styles.devSubContainer}>
                   <Image style={styles.devImgStyle}
-                    source={require("../images/m2.jpg")}
+                    source={{uri:"https://avatars.githubusercontent.com/u/83116065?v=4"}}
                     resizeMode="contain"  
                   />
                   <Image style={styles.devImgStyle}
@@ -54,7 +61,7 @@ const About = () => {
                     resizeMode="contain"  
                   />
                   <Image style={styles.devImgStyle}
-                    source={require("../images/m2.jpg")}
+                    source={{uri:"https://avatars.githubusercontent.com/u/84742960?v=4"}}
                     resizeMode="contain"  
                   />
                 </View>
@@ -164,6 +171,7 @@ const styles = StyleSheet.create({
     fontSize:normalize(17),
     marginTop:normalize(15),
     marginBottom:normalize(4),
+    fontWeight:'bold',
     
   },  
   devContainerSubTitle:{
@@ -180,7 +188,7 @@ const styles = StyleSheet.create({
     aspectRatio:1,
     borderRadius:50,
     marginRight:normalize(2),
-    borderWidth:2,
+    borderWidth:1.2,
     borderColor:'white',
   },
 
@@ -207,6 +215,7 @@ const styles = StyleSheet.create({
     color:'white',
     fontSize:normalize(17),
     marginBottom:normalize(10),
+    fontWeight:'bold',
     
   },
   contDesc:{
