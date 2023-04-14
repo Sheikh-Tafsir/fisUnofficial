@@ -24,6 +24,7 @@ const normalize = (size) => {
 const Eventadm = () => {
   const navigation=useNavigation();
   const db = getFirestore();
+  const [club, onChangeClub] = useState();
   const [head, onChangeHead] = useState();
   const [date, onChangeDate] = useState();
   const [day, onChangeDay] = useState();
@@ -31,6 +32,7 @@ const Eventadm = () => {
   const [year, onChangeYear] = useState();
   const [desc, onChangeDesc] = useState();
   const [imgg, onChangeImg] = useState();
+  
   const [respf, onChangeRespf] = useState();
   const [image, setImage] = useState(null);
 
@@ -39,32 +41,36 @@ const Eventadm = () => {
 
       
   const Create = () => {
-      if(head==null || head==''){
-          onChangeRespf("post title is empty");
-      }
-      else if(date==null || date==''){
+    if(head==null || head==''){
+        onChangeRespf("post title is empty");
+    }
+    else if(date==null || date==''){
         onChangeRespf("post date is empty");
     }
-      else if(desc==null || desc==''){
-          onChangeRespf("post description is empty");
-      }
-      else if((image==null || image=='') && (imgg==null || imgg=='')){
-          onChangeRespf("image link is empty");
-      }
-      else{
-          setDoc(doc(db,"events",head),{
-              eventname:head,
-              eventdate:date,
-              eventdec:desc,
-              eventimg:imgg,
-              eventmem:[],
-          }).then(()=>{
+    else if(desc==null || desc==''){
+        onChangeRespf("post description is empty");
+    }
+    else if(club==null || club==''){
+        onChangeRespf("club description is empty");
+    }
+    else if((image==null || image=='') && (imgg==null || imgg=='')){
+        onChangeRespf("image link is empty");
+    }
+    else{
+        setDoc(doc(db,"events",head),{
+            eventclub:club,
+            eventname:head,
+            eventdate:date,
+            eventdec:desc,
+            eventimg:imgg,
+            eventmem:[],
+        }).then(()=>{
               console.log('event data submitted');
-          }).catch((error) =>{
+        }).catch((error) =>{
               console.log(error);
-          });
-          navigation.navigate("Resp");
-      }
+        });
+        navigation.navigate("Resp");
+    }
   };
   
   const selectOneFile = async () => {
@@ -100,6 +106,13 @@ const Eventadm = () => {
                     <Text style={styles.title}>Create Event</Text>
                     <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
                             <View style={styles.form}>
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={onChangeClub}
+                                    value={club}
+                                    textAlignVertical={'top'}
+                                    placeholder="Club name"
+                                />
                                 <TextInput
                                     style={styles.input}
                                     onChangeText={onChangeHead}
@@ -182,7 +195,7 @@ const styles = StyleSheet.create({
       borderColor:'white',
       borderWidth:normalize(1),
       borderRadius:15,
-      height:normalize(445),
+      height:normalize(460),
       marginHorizontal:'5%',
       marginTop:normalize(5),
   },
@@ -197,7 +210,7 @@ const styles = StyleSheet.create({
       borderColor:'white',
       borderBottomWidth:normalize(2),
       color:'black',
-      marginBottom:normalize(15),
+      marginBottom:normalize(10),
       height:normalize(35),
       borderRadius:5,
       paddingLeft:normalize(10),

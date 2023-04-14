@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { firebase } from './Config';
 import { db } from "./Config";
 import { getFirestore } from 'firebase/firestore'
-
+import { useIsFocused } from '@react-navigation/native';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -22,6 +22,7 @@ const normalize = (size) => {
 
 const Fetc = () => {
 //export default function Fetc() {
+    const isFocused = useIsFocused();
     const navigation=useNavigation();
     const db = getFirestore();
     const [userDoc, setUserDoc]=useState(null);
@@ -71,8 +72,11 @@ const Fetc = () => {
     };*/
 
     useEffect(() => {
+        if (isFocused) {
+            // refresh the page here
+        }
         Read();
-      }, []);
+      }, [isFocused]);
 
     const Read = () => {
         let users = [];

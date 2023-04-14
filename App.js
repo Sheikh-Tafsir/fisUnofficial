@@ -31,6 +31,7 @@ import Eventadm from './src/screens/Eventadm';
 import Viewevents from './src/screens/Viewevents';
 import Vieweventpartadm from './src/screens/Vieweventpartadm'
 import Vieweventsresp from './src/screens/Vieweventsresp';
+import Notification from './src/screens/Notification';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -276,6 +277,16 @@ export default function App() {
         />
 
         <Stack.Screen name="Vieweventsresp" component={Vieweventsresp}
+          options={{ 
+            headerTitle: (props) => <Logo {...props} />,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+          }}
+        />
+
+        <Stack.Screen name="Notification" component={Notification}
           options={{ 
             headerTitle: (props) => <Logo {...props} />,
             headerTintColor: 'white',

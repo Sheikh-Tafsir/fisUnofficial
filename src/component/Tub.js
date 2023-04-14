@@ -10,6 +10,8 @@ import Fetc from './Fetc';
 import Team from '../screens/Team';
 import Home from "../screens/Home";
 import Viewevents from "../screens/Viewevents";
+import Notification from "../screens/Notification"
+import { useIsFocused } from '@react-navigation/native';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -24,6 +26,12 @@ const normalize = (size) => {
 
 const Tub = () => {
     const Tab = createBottomTabNavigator();
+    const isFocused = useIsFocused();
+    useEffect(() => {
+      if (isFocused) {
+        // refresh the page here
+      }
+    }, [isFocused]);
   return (
     
       <Tab.Navigator>
@@ -65,7 +73,7 @@ const Tub = () => {
             tabBarIcon:({focused, tintColor}) =>(
               <Image
                 focused={focused}
-                source={{uri:"https://img.icons8.com/ios-filled/344/trophy.png"}}
+                source={{uri:"https://i.ibb.co/RNkCRyQ/pngwing-com.png"}}
                 style={styles.iconStyle}
               />
             ),
@@ -77,31 +85,7 @@ const Tub = () => {
           }}
         />
 
-        <Tab.Screen name="Gallery" component={Gallery} 
-          options={{ //this component views different photos
-            headerShown:false,
-            headerTitle: (props) => <Logo {...props} />,
-            headerStyle: {
-              backgroundColor: '#0b0f1e',
-            },
-            tabBarActiveBackgroundColor:'white',
-            tabBarInactiveBackgroundColor:'#0b0f1e',
-            tabBarIcon:({focused, tintColor}) =>(
-              <Image
-                focused={focused}
-                source={{uri:"https://i.ibb.co/RNkCRyQ/pngwing-com.png"}}
-                style={styles.iconStyle}
-              />
-            ),
-            shifting:true,
-            tabBarStyle:{
-              height:'8%',
-            },
-            tabBarLabel: "Gallery",
-          }}
-        />
-        
-        <Tab.Screen name="Viewevents" component={Viewevents} 
+<Tab.Screen name="Viewevents" component={Viewevents} 
           options={{ //this component views and participates in events
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -124,7 +108,31 @@ const Tub = () => {
             tabBarLabel: "Events",
           }}
         />
-
+        
+        <Tab.Screen name="Notification" component={Notification} 
+          options={{ //this component views different photos
+            headerShown:false,
+            headerTitle: (props) => <Logo {...props} />,
+            headerStyle: {
+              backgroundColor: '#0b0f1e',
+            },
+            tabBarActiveBackgroundColor:'white',
+            tabBarInactiveBackgroundColor:'#0b0f1e',
+            tabBarIcon:({focused, tintColor}) =>(
+              <Image
+                focused={focused}
+                source={{uri:"https://img.icons8.com/ios-filled/344/trophy.png"}}
+                style={styles.iconStyle}
+              />
+            ),
+            shifting:true,
+            tabBarStyle:{
+              height:'8%',
+            },
+            tabBarLabel: "Notification",
+          }}
+        />
+        
         <Tab.Screen name="About" component={About} 
           options={{ //this component is user profile 
             headerShown:false,

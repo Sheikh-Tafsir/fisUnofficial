@@ -38,7 +38,7 @@ const Vieweventsresp = () => {
             />
             <Text style={[styles.resp,{fontSize:normalize(27),marginTop:'10%'}]}> Response taken</Text>
             <Text style={styles.resp}>succesful</Text>
-            <TouchableOpacity style={styles.butVw} onPress={()=>onRefresh()}>
+            <TouchableOpacity style={styles.butVw} onPress={()=>navigation.navigate("Tub")}>
                 <Text style={styles.btn} >Done</Text>
             </TouchableOpacity>
         </LinearGradient>

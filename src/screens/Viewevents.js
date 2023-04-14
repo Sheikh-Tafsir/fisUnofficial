@@ -8,6 +8,8 @@ import { db } from "../component/Config";
 import { getFirestore } from 'firebase/firestore'
 import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
 import AnimatedLoader from "react-native-animated-loader";
+import { useIsFocused } from '@react-navigation/native';
+
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -18,6 +20,18 @@ const normalize = (size) => {
   } else {
     return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
   }
+};
+const { width, height } = Dimensions.get('window');
+const responsiveWidth = (value) => {
+    const widthPercentage = (value / 375) * 100; // 375 is the standard width for iPhone 11
+    const pixelWidth = (widthPercentage * width) / 100;
+    return pixelWidth;
+};
+  
+const responsiveHeight = (value) => {
+    const heightPercentage = (value / 812) * 100; // 812 is the standard height for iPhone 11
+    const pixelHeight = (heightPercentage * height) / 100;
+    return pixelHeight;
 };
 
 const Viewevents = () => {
@@ -31,15 +45,16 @@ const Viewevents = () => {
     const [visible, setVisible] = useState(false);
     const [userinfo,onChangeUserinfo] = useState([]);
     const [respf, onChangeRespf] = useState();
+    const isFocused = useIsFocused();
 
-    const joinEvent = (eventname,eventdate,eventdec,eventimg,eventmem) => {
+    const joinEvent = (eventclub,eventname,eventdate,eventdec,eventimg,eventmem) => {
 
         AsyncStorage.getItem('any_key_here')
         .then((value)=>{
-
             let users = [];
+            //let eventNotification= [];
             getDocs(collection(db,"eventparticipants")).then(docSnap=>{
-                let userEventName=value+eventname;
+                let userEventName=value+eventname+eventclub;
                 docSnap.forEach((doc)=>{
                     if(doc.id == userEventName){
                         users.push({ ...doc.data(),id:doc.id}); 
@@ -60,6 +75,7 @@ const Viewevents = () => {
                     
                     //set data in events table
                     setDoc(doc(db,"events",eventname),{
+                        eventclub:eventclub,
                         eventname:eventname,
                         eventdate:eventdate,
                         eventdec:eventdec,
@@ -72,7 +88,8 @@ const Viewevents = () => {
                     });
 
                     //set data in eventparticipants table
-                    setDoc(doc(db,"eventparticipants",value+eventname),{
+                    setDoc(doc(db,"eventparticipants",value+eventname+eventclub),{
+                        eventclub:eventclub,
                         eventname:eventname,
                         username:value,
                     }).then(()=>{
@@ -81,18 +98,42 @@ const Viewevents = () => {
                         console.log(error);
                     });
 
+                    //set data in eventnotifications table
+                    
+                    getDocs(collection(db,"eventnotifications")).then(docSnap=>{
+                        var eventsnotifiy=[];
+                        docSnap.forEach((doc)=>{
+                            if(doc.id == value){
+                                eventsnotifiy.push( ...doc.data().eventsnotifiy); 
+                            }
+                        });
+                        
+                        eventsnotifiy.push({eventname,eventdate});
+                        setDoc(doc(db,"eventnotifications",value),{
+                            username:value,
+                            eventsnotifiy:eventsnotifiy,
+                        }).then(()=>{
+                            console.log('event data submitted in eventnotification');
+                        }).catch((error) =>{
+                            console.log(error);
+                        });
+                    });
+
+                    
+
                     navigation.navigate("Vieweventsresp");
                 }
-            })
+            });
         })
     };
 
     useEffect(() => {
-        setInterval(() => {
-        setVisible(visible);
-        }, 4000);
+        if (isFocused) {
+            // refresh the page here
+        }
+        onChangeRespf("");
         Read();
-    }, []);
+    }, [isFocused]);
 
     const Read = () => {
         let users = [];
@@ -139,17 +180,18 @@ const Viewevents = () => {
                     employeeList.map((curElem,id)=>{
                         return (
                             <View key={id} style={styles.evePoints}>
-                                <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
+                                <LinearGradient colors={['#317cce','#47abbf']} start={{x: 0.0, y: 0.5}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
                                     <View  style={styles.pntTxt}>
+                                        <Text style={styles.pntClub}>Club: {curElem.eventclub}</Text>
                                         <Text style={styles.pntHead}>Name: {curElem.eventname}</Text>
                                         <Text style={styles.pntDate}>Date: {curElem.eventdate}</Text>
                                         <Text style={styles.pntDesc}>Description: {curElem.eventdec}</Text>
                                         <Image
                                             style={styles.imgStyle}
-                                            source={{uri:(curElem.eventimg)}}
+                                            source={{uri:curElem.eventimg}}
                                         />
                                         <Text style={styles.submitresp}>{respf}</Text>
-                                        <TouchableOpacity style={styles.joinBut} onPress={()=>joinEvent(curElem.eventname, curElem.eventdate, curElem.eventdec, curElem.eventimg, curElem.eventmem)}>
+                                        <TouchableOpacity style={styles.joinBut} onPress={()=>joinEvent(curElem.eventclub, curElem.eventname, curElem.eventdate, curElem.eventdec, curElem.eventimg, curElem.eventmem)}>
                                             <Text style={styles.joinButText}>Join Now</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -183,67 +225,83 @@ const styles = StyleSheet.create({
     },
     title:{
         color:'white',
-        fontSize:30,
+        fontSize:responsiveHeight(40),
         fontWeight:'bold',
         textAlign:'center',
         marginBottom:5,
-        marginTop:normalize(15),
-        marginBottom:normalize(15),
+        marginTop:responsiveHeight(15),
+        marginBottom:responsiveHeight(15),
     },
     subContainer:{
-        marginBottom:normalize(65),
+        // marginBottom:responsiveHeight(0),
+        width:'84%',
+        marginHorizontal:'8%',
     },
 
     backLinearGradient:{
         borderColor:'white',
         borderWidth:0.7,
         borderRadius:15,
+        height:responsiveHeight(660),
+        width:'100%',
+        marginBottom:responsiveHeight(30),
     },
-    evePoints:{
+    /*evePoints:{
         width:'84%',
         marginHorizontal: '8%',  
         
-    },
+    },*/
     pntTxt:{
         width:'86%',
         marginHorizontal: '7%',
-        marginTop:30,
+        marginTop:responsiveHeight(30),
         
+    },
+    pntClub:{
+        color:'white',
+        fontSize:responsiveHeight(18),
+        fontWeight:'bold',
+        marginBottom:responsiveHeight(10),
     },
     pntHead:{
         color:'white',
-        fontSize:normalize(20),
+        fontSize:responsiveHeight(20),
         fontWeight:'bold',
-        marginBottom:normalize(10),
+        marginBottom:responsiveHeight(10),
     },
     pntDate:{
         color:'white',
         fontSize:18,
-        marginBottom:normalize(10),
+        marginBottom:responsiveHeight(10),
     },
     pntDesc:{
         color:'white',
         fontSize:16,
-        marginBottom:normalize(20),
+        height:responsiveHeight(180),
+        marginBottom:responsiveHeight(20),
+        // borderWidth:1,
+        // borderColor:'white',
     },
     imgStyle:{
         width:'94%',
         height:undefined,
-        aspectRatio:1.3,
+        aspectRatio:1.25,
         marginHorizontal: '3%',
-        marginBottom:25,
+        marginBottom:responsiveHeight(10),
         borderRadius:7,
+        // borderWidth:1,
+        // borderColor:'white',
     },
     submitresp:{
         textAlign:'center',
         color:'red',
         fontSize:15,
-        marginBottom:normalize(12),
+        marginBottom:responsiveHeight(10),
     },
     joinBut:{
         color:'#023050',
         backgroundColor:'white',
-        height:'8%',
+        height:'6%',
         borderRadius:5,
         marginBottom:'6%',
         width:'90%',
@@ -251,20 +309,20 @@ const styles = StyleSheet.create({
     },
     joinButText:{
         color:'#023050',
-        fontSize:normalize(16),
+        fontSize:responsiveHeight(17),
         fontWeight:'bold',
         textAlign:'center',
-        lineHeight:normalize(23),
+        lineHeight:responsiveHeight(32),
         
     },
-    lottie: {
+    /*lottie: {
         width: 100,
         height: 100,
         
     },
     lottieStyle:{
         
-    },
+    },*/
 });
 
 export default Viewevents
