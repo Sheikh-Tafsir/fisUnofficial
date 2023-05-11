@@ -4,7 +4,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 import AnimatedLoader from "react-native-animated-loader";
 import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
-
+import { useIsFocused } from '@react-navigation/native';
 
 import { firebase } from '../component/Config';
 import { db } from "../component/Config";
@@ -32,30 +32,54 @@ const Login = () => {
     const [userinfo,onChangeUserinfo] = useState([]);
     const [visible, setVisible] = useState(false);
     const [textInputValue, settextInputValue] = useState('');
+
+    const [asyncVal,setAsyncVal]=useState(''); //local storage
+    const isFocused = useIsFocused(); // refresh
     
     useEffect(() => {
+        if (isFocused) {
+            // refresh the page here
+            //checkNav();
+        }
         setInterval(() => {
         setVisible(visible);
         }, 4000);
-    }, []);
+        checkNav();
+        
+    }, [isFocused]);
 
     const CheckLogin = () => {
         setVisible(!visible);
         if(username == null || username == ''){
             onChangeRespf("username is empty");
             navigation.navigate("Login");
-            
         }
         else if(password == null || password == ''){
             onChangeRespf("password is empty");
             navigation.navigate("Login");
 
         }
-        else if(username === "tafsir" && password === "tafsir12"){
+        else if(username == "tafsir" && password == "tafsir12"){
             onChangeRespf("Loggin in");
             AsyncStorage.setItem('any_key_here',username);
             navigation.navigate("Tubadm");
         }
+        else if(username == "alif" && password == "alif12"){
+            onChangeRespf("Loggin in");
+            AsyncStorage.setItem('any_key_here',username);
+            navigation.navigate("Tubadm");
+        }
+        else if(username == "rayan" && password == "rayan12"){
+            onChangeRespf("Loggin in");
+            AsyncStorage.setItem('any_key_here',username);
+            navigation.navigate("Tubadm");
+        }
+        else if(username == "peal" && password == "peal2"){
+            onChangeRespf("Loggin in");
+            AsyncStorage.setItem('any_key_here',username);
+            navigation.navigate("Tubadm");
+        }
+        
         else{
             let users = [];
             getDocs(collection(db,"login")).then(docSnap=>{
@@ -85,27 +109,46 @@ const Login = () => {
                     else{
                         onChangeRespf("username or password is wrong");
                         navigation.navigate("Login");
-
                     }
                 }
-            });
-
-            
+            });   
         }
+    };
+
+    
+    const checkNav = ()=>{
+        AsyncStorage.getItem('any_key_here')
+        .then((value)=>{
+            setAsyncVal(value);
+            //alert(value);
+            if(value == null){
+                navigation.navigate("Login");
+            }
+            else if(value == ""){
+                navigation.navigate("Login");
+            }
+            else{
+                if(value == "tafsir") navigation.navigate("Tubadm");
+                else if(value == "alif") navigation.navigate("Tubadm");
+                else if(value == "rayan") navigation.navigate("Tubadm");
+                else if(value == "peal") navigation.navigate("Tubadm");
+                else navigation.navigate("Tub");
+            }
+        })
     };
     
 
   return (
     <KeyboardAvoidingView behaviour={Platform.OS === 'ios' ? 'padding' : null}>
         <ImageBackground source={require("../images/logsignback.jpg")} resizeMode="cover" style={styles.backImage}>
-            <AnimatedLoader
+            {/* <AnimatedLoader
                 visible={visible}
                 overlayColor="rgba(255,255,255,0.75)"
                 animationStyle={styles.lottie}
                 style={styles.lottieStyle}
                 speed={1}>
                 <Text>Matching Credentials...</Text>
-            </AnimatedLoader>
+            </AnimatedLoader> */}
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}> 
                     <StatusBar

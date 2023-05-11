@@ -1,11 +1,12 @@
-import {  SafeAreaView, ScrollView, Dimensions,PixelRatio, TouchableOpacity, StyleSheet, Text, View, Image, ImageBackground, StatusBar } from 'react-native';
-import {React, Children, useState } from 'react';
+import {SafeAreaView, ScrollView, Dimensions,PixelRatio, TouchableOpacity, StyleSheet, Text, View, Image, ImageBackground, StatusBar } from 'react-native';
+import {React, Children, useState, useEffect } from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
 import Menu from '../component/Menu';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
 import {BlurView} from '@react-native-community/blur';
 import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
+import { useIsFocused } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const responsiveWidth = (value) => {
@@ -21,26 +22,38 @@ const responsiveHeight = (value) => {
 };
 
 const Home = (props) => {
+    const isFocused = useIsFocused();
     const description="In publishing and graphic design, Lore ipsum is a placeholder text commonly used to demonstrate ";
     const navigation=useNavigation();
-    const [asyncVal,setAsyncVal]=useState('');
+    const [asyncVal,setAsyncVal]=useState(''); //local storage
+    
     const checkNav = ()=>{
         AsyncStorage.getItem('any_key_here')
         .then((value)=>{
             setAsyncVal(value);
             //alert(value);
             if(value === null){
-                navigation.navigate("Login");
+                //navigation.navigate("Login");
             }
             else if(value === ''){
-                navigation.navigate("Login");
+                //navigation.navigate("Login");
             }
             else{
-                if(value === 'tafsir') navigation.navigate("Tubadm");
+                if(value === "tafsir") navigation.navigate("Tubadm");
+                else if(value === "alif") navigation.navigate("Tubadm");
+                else if(value === "rayan") navigation.navigate("Tubadm");
+                else if(value === "peal") navigation.navigate("Tubadm");
                 else navigation.navigate("Tub");
             }
         })
     };
+
+    useEffect(() => {
+        if (isFocused) {
+            // refresh the page here
+        }
+        checkNav();
+    }, [isFocused]);
 
     return (
     <View style={styles.mainContainer}>
@@ -98,8 +111,8 @@ const Home = (props) => {
                         <View>
                             <TouchableOpacity
                                 style={styles.buttonStyle}
-                                /*onPress={()=>navigation.navigate("Homes")}>*/
-                                onPress={()=>checkNav()}>
+                                onPress={()=>navigation.navigate("Login")}>
+                                {/*onPress={()=>checkNav()}*/}
                                 <Text style={styles.startTextStyle}>Start</Text>
                             </TouchableOpacity>
                         </View>

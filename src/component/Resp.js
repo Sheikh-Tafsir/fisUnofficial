@@ -1,6 +1,7 @@
 import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform } from "react-native";
-import React from 'react'
+import React, {useState} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
+import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
@@ -16,6 +17,30 @@ const normalize = (size) => {
 
 const Resp = () => {
     const navigation=useNavigation();
+    const [asyncVal,setAsyncVal]=useState(''); //local storage
+
+    const findUserName = ()=>{
+      AsyncStorage.getItem('any_key_here')
+      .then((value)=>{
+          setAsyncVal(value);
+          //alert(value);
+          if(value == "tafsir"){
+            navigation.navigate("Tubadm");
+          }
+          else if(value == "alif"){
+            navigation.navigate("Tubadm");
+          }
+          else if(value == "peal"){
+            navigation.navigate("Tubadm");
+          }
+          else if(value == "rayan"){
+            navigation.navigate("Tubadm");
+          }
+          else{
+            navigation.navigate("Tub");
+          }
+      })
+    };
 
   return (
     <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
@@ -23,8 +48,8 @@ const Resp = () => {
             <Text style={[styles.resp,{fontSize:normalize(27),marginTop:'10%'}]}>Post created</Text>
             <Text style={styles.resp}>Successfully</Text>
             <View style={styles.butVw}>
-                {/* <Text style={styles.btn}  onPress={()=>navigation.navigate("Pushc")}>Create another</Text> */}
-                <Text style={styles.btn}  onPress={()=>navigation.navigate("Home")}>Go Back</Text>
+                <Text style={styles.btn}  onPress={()=>navigation.navigate("Home")}>Create another</Text> 
+                {/* <Text style={styles.btn}  onPress={findUserName}>Go Back</Text>*/}
             </View>
         </LinearGradient>
     </ImageBackground>

@@ -2,17 +2,13 @@ import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, T
 import {React,useState, useEffect} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homes from '../screens/Homes';
 import About from '../screens/About';
-import Gallery from '../screens/Gallery';
 import Logo from './Logo';
-import Fetc from './Fetc';
-import Team from '../screens/Team';
-import Home from "../screens/Home";
 import Homesadm from "../screens/Homesadm";
 import Pushc from "./Pushc";
 import Eventadm from "../screens/Eventadm";
 import Vieweventpartadm from "../screens/Vieweventpartadm"
+import { useIsFocused } from '@react-navigation/native';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -25,11 +21,17 @@ const normalize = (size) => {
   }
 };
 
-
 const Tubadm = () => {
     const Tab = createBottomTabNavigator();
+    const isFocused = useIsFocused();
     
-  return (
+    useEffect(() => {
+      if (isFocused) {
+        // refresh the page here
+      }
+    }, [isFocused]);
+  
+    return (
       <Tab.Navigator initialRouteName="Homesadm">
         <Tab.Screen name="Homesadm" component={Homesadm} 
           options={{ 

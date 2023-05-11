@@ -40,12 +40,12 @@ const Viewevents = () => {
     const db = getFirestore();
     const [userDoc, setUserDoc]=useState(null);
     const [eventName,setEventName]=useState(null);
-    const [asyncVal,setAsyncVal]=useState('');
     const [employeeList,setEmployeeList] = useState([]);
     const [visible, setVisible] = useState(false);
     const [userinfo,onChangeUserinfo] = useState([]);
     const [respf, onChangeRespf] = useState();
     const isFocused = useIsFocused();
+    const [asyncVal,setAsyncVal]=useState(''); //local storage
 
     const joinEvent = (eventclub,eventname,eventdate,eventdec,eventimg,eventmem) => {
 

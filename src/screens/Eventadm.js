@@ -1,5 +1,5 @@
 import { StatusBar,KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, TouchableOpacity,TextInput, View, StyleSheet, Text, Image, Button, Pressable, ImageBackground, Platform} from "react-native";
-import {React, useState, useCallback} from 'react'
+import {React, useState, useEffect, useCallback} from 'react'
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 import Menu from '../component/Menuadm';
@@ -8,6 +8,8 @@ import { db } from "../component/Config";
 import { addDoc, collection, doc, getDoc, setDoc, getDocs, getFirestore } from 'firebase/firestore'
 import DocumentPicker from "react-native-document-picker";
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage, { AsyncStorageHook } from "@react-native-async-storage/async-storage";
+import { useIsFocused } from '@react-navigation/native';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
@@ -38,8 +40,9 @@ const Eventadm = () => {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const isFocused = useIsFocused();
+  const [asyncVal,setAsyncVal]=useState(''); //local storage
 
-      
   const Create = () => {
     if(head==null || head==''){
         onChangeRespf("post title is empty");
@@ -72,6 +75,23 @@ const Eventadm = () => {
         navigation.navigate("Resp");
     }
   };
+
+  const findUserName = ()=>{
+    AsyncStorage.getItem('any_key_here')
+    .then((value)=>{
+        setAsyncVal(value);
+        //alert(value);
+        if(value == "alif"){
+            onChangeClub("IUTCS");
+        }
+        else if(value == "peal"){
+            onChangeClub("IUTPS");
+        }
+        else if(value == "rayan"){
+            onChangeClub("IUTFIS");
+        }
+    })
+  };
   
   const selectOneFile = async () => {
       // Pick a single file
@@ -93,6 +113,13 @@ const Eventadm = () => {
       //console.log("we are");
   };
 
+  useEffect(() => {
+    if (isFocused) {
+        // refresh the page here
+    }
+    findUserName();
+  }, [isFocused]);
+
   return (
     <KeyboardAvoidingView behaviour={Platform.OS === 'ios' ? 'padding' : null}>
         <ImageBackground source={{uri: "https://iphoneswallpapers.com/wp-content/uploads/2022/08/Astronomy-iPhone-Wallpaper-HD.jpg" }} resizeMode="cover" style={styles.backImage}>
@@ -106,13 +133,13 @@ const Eventadm = () => {
                     <Text style={styles.title}>Create Event</Text>
                     <LinearGradient colors={['#023050', '#212022' ]} start={{x: 0.0, y: 0.7}} end={{x: 0.5, y: 1.0}} style={styles.backLinearGradient}>
                             <View style={styles.form}>
-                                <TextInput
+                                {/* <TextInput
                                     style={styles.input}
                                     onChangeText={onChangeClub}
                                     value={club}
                                     textAlignVertical={'top'}
                                     placeholder="Club name"
-                                />
+                                /> */}
                                 <TextInput
                                     style={styles.input}
                                     onChangeText={onChangeHead}
@@ -195,7 +222,7 @@ const styles = StyleSheet.create({
       borderColor:'white',
       borderWidth:normalize(1),
       borderRadius:15,
-      height:normalize(460),
+      height:normalize(420),
       marginHorizontal:'5%',
       marginTop:normalize(5),
   },

@@ -2,13 +2,10 @@ import { KeyboardAvoidingView,Dimensions,PixelRatio, SafeAreaView, ScrollView, T
 import {React,useState, useEffect} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homes from '../screens/Homes';
 import About from '../screens/About';
-import Gallery from '../screens/Gallery';
 import Logo from './Logo';
 import Fetc from './Fetc';
 import Team from '../screens/Team';
-import Home from "../screens/Home";
 import Viewevents from "../screens/Viewevents";
 import Notification from "../screens/Notification"
 import { useIsFocused } from '@react-navigation/native';
@@ -32,8 +29,8 @@ const Tub = () => {
         // refresh the page here
       }
     }, [isFocused]);
-  return (
-    
+  
+    return (
       <Tab.Navigator>
         <Tab.Screen name="Fetc" component={Fetc} 
           options={{ //this component views blog
@@ -56,8 +53,6 @@ const Tub = () => {
               height:'8%',
             },
             tabBarLabel: "Home",
-    
-            
           }}
         />
 
@@ -85,7 +80,7 @@ const Tub = () => {
           }}
         />
 
-<Tab.Screen name="Viewevents" component={Viewevents} 
+        <Tab.Screen name="Viewevents" component={Viewevents} 
           options={{ //this component views and participates in events
             headerShown:false,
             headerTitle: (props) => <Logo {...props} />,
@@ -156,9 +151,7 @@ const Tub = () => {
             tabBarLabel: "Dashboard",
           }}
         />
-
       </Tab.Navigator>
-      
   )
 }
 const styles = StyleSheet.create({

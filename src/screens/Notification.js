@@ -29,8 +29,6 @@ const Notification = () => {
     const db = getFirestore();
     const [employeeList,setEmployeeList] = useState([]);
     const [username,onChaneusername] = useState();
-    const [refreshing, setRefreshing] = useState(false);
-    
 
     const findUserName = () =>{
         AsyncStorage.getItem('any_key_here')
@@ -53,11 +51,7 @@ const Notification = () => {
                     else{
                         users.push({ ...doc.data(),id:doc.id});
                     }
-  
-                    
-                    
                 });
-                
                 setEmployeeList([...users]);
             });
     };  
@@ -68,7 +62,7 @@ const Notification = () => {
         }
         findUserName();
         Read();
-      }, [isFocused]);
+    }, [isFocused]);
 
     return(
         <ImageBackground source={{uri:"https://img.freepik.com/premium-photo/beautiful-moon-galaxy-with-wolf_342788-224.jpg?w=2000" }} resizeMode="cover" style={styles.backImage}>

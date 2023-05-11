@@ -1,6 +1,6 @@
 import { SafeAreaView,ScrollView,Dimensions,PixelRatio,TouchableOpacity, StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
-import React from 'react';
-import Menu from '../component/Menuadm';
+import React,{useEffect,useState} from 'react';
+import { useIsFocused } from '@react-navigation/native';
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 const scale = SCREEN_WIDTH / 320;
 const normalize = (size) => {
@@ -12,6 +12,13 @@ const normalize = (size) => {
   }
 };
 const Homesadm = () => {
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    if (isFocused) {
+        // refresh the page here
+    }
+  }, [isFocused]);
+  
   return (
     <ImageBackground source={require("../images/menuback.jpg")} resizeMode="cover" style={styles.image}>
     <SafeAreaView style={styles.container}>
